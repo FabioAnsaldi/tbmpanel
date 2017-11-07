@@ -1,0 +1,24 @@
+{
+  "name": "tbmpanel",
+  "version": "1.0.0",
+  "description": "Triboo Media Panel project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FabioAnsaldi/tbmpanel.git"
+  },
+  "keywords": [
+    "React",
+    "Redux",
+    "Router"
+  ],
+  "author": "Fabio Ansaldi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FabioAnsaldi/tbmpanel/issues"
+  },
+  "homepage": "https://github.com/FabioAnsaldi/tbmpanel#readme"
+}
