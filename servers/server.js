@@ -22,7 +22,7 @@ app.use( webpackDevMiddleware( compiler, { noInfo: true, publicPath: webpackConf
 app.use( webpackHotMiddleware( compiler ) );
 
 app.get( '/', function ( req, res, next ) {
-    res.sendFile( path.resolve( __dirname, '../src/index.html' ) );
+    res.sendFile( path.join( process.cwd(), config.paths.source + '/index.html' ) );
 } );
 
 app.set( 'address', address );

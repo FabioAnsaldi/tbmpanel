@@ -11,8 +11,8 @@ const path = require( 'path' );
 exports.paths = {
     configuration: 'config',
     source: 'src',
-    production: 'build',
-    development: '/dist/',
+    build: 'build',
+    assets: '/',
     bundle: 'bundle.js'
 };
 

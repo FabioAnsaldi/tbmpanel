@@ -31,5 +31,6 @@ We find configuration files into the folder `./config`
 | module.loaders | style-loader, css-loader | Adds CSS to the DOM by injecting a <style> tag | https://github.com/webpack-contrib/style-loader |
 | entry Array | webpack-hot-middleware/client, /index | Instructs webpack about virtual server entry point (localhost:PORT) and index JS file | https://github.com/glenjamin/webpack-hot-middleware |
 | plugins Array | HotModuleReplacementPlugin | It compile the hot update chunks for developing environment | https://webpack.js.org/plugins/hot-module-replacement-plugin/ |
+| plugins Array | HtmlWebpackPlugin | Used to inject bundle.js file into index.html template | https://github.com/jantimon/html-webpack-plugin |
 ######
 

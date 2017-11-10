@@ -6,6 +6,7 @@
 const path = require( 'path' );
 const webpack = require( 'webpack' );
 const config = require( './tbmpanel.config.js' );
+const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -14,12 +15,17 @@ module.exports = {
         path.join( process.cwd(), config.paths.source + '/index' )
     ],
     output: {
-        path: path.join( process.cwd(), config.paths.production ),
+        path: path.join( process.cwd(), config.paths.build ),
         filename: config.paths.bundle,
-        publicPath: config.paths.development
+        publicPath: config.paths.assets
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin( {
+            title: 'Custom template',
+            template: path.join( process.cwd(), config.paths.source + '/index.html' ),
+            inject: 'body'
+        } ),
         new webpack.DefinePlugin( {} ),
     ],
     module: {
@@ -35,7 +41,7 @@ module.exports = {
             use: [ {
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react', 'es2015']
+                    presets: [ 'react', 'es2015' ]
                 }
             } ]
         } ],

@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 class App extends Component {
     render() {
         return (
-            <div>Ciao</div>
+            <div>Ciao Mondo!</div>
         );
     }
 }
