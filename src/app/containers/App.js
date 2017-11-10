@@ -1,3 +1,8 @@
+/**
+ * Created by fabio.ansaldi on 10/11/2017.
+ */
+
+'use strict';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 

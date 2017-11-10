@@ -1,7 +1,8 @@
 /**
- * Created by fabio.ansaldi on 10/05/2017.
+ * Created by fabio.ansaldi on 10/11/2017.
  */
 
+'use strict';
 const path = require( 'path' );
 const webpack = require( 'webpack' );
 const config = require( './tbmpanel.config.js' );
@@ -19,16 +20,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin( {
-            'process.env': {
-                'ENV': '"development"'
-            },
-            'config': {
-                'API_URL': {
-                    'leodev': '"http://leonardodev02:8078/api/"'
-                }
-            }
-        } ),
+        new webpack.DefinePlugin( {} ),
     ],
     module: {
         rules: [ {
