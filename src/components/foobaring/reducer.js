@@ -4,16 +4,16 @@
 
 'use strict';
 const initialState = [ {
-    output: 'Use Redux'
+    output: 'Foo!'
 } ];
 
-const initialreducer = ( state = initialState, action ) => {
+const foobaringReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'INITIALIZATION':
+        case 'FOOBAR':
             return Object.assign( {}, state, { 'output': action.output } );
         default:
             return state;
     }
 };
 
-export default initialreducer;
+export default foobaringReducer;

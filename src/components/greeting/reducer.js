@@ -4,16 +4,16 @@
 
 'use strict';
 const initialState = [ {
-    output: 'Use Redux'
+    output: 'What?'
 } ];
 
-const initialreducer = ( state = initialState, action ) => {
+const greetingReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'INITIALIZATION':
+        case 'SAY_HELLO':
             return Object.assign( {}, state, { 'output': action.output } );
         default:
             return state;
     }
 };
 
-export default initialreducer;
+export default greetingReducer;

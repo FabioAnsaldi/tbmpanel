@@ -1,14 +1,19 @@
-import { createStore } from 'redux';
-import rootReducer from '../reducers/index';
+/**
+ * Created by fabio.ansaldi on 10/11/2017.
+ */
 
-export default function configureStore( initialState ) {
-    const store = createStore( rootReducer, initialState );
-    if ( module.hot ) {
-        // Enable Webpack hot module replacement for reducers
-        module.hot.accept( '../reducers', () => {
-            const nextReducer = rootReducer;
-            store.replaceReducer( nextReducer );
-        } );
-    }
-    return store;
+'use strict';
+import { createStore } from 'redux';
+import combinedReducers from '../reducers/combiner';
+
+const store = createStore( combinedReducers );
+
+if ( module.hot ) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept( '../reducers', () => {
+        const nextReducer = combinedReducers;
+        store.replaceReducer( nextReducer );
+    } );
 }
+
+export default store;

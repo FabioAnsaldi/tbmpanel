@@ -22,7 +22,6 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin( {
-            title: 'Custom template',
             template: path.join( process.cwd(), config.paths.source + '/index.html' ),
             inject: 'body'
         } ),

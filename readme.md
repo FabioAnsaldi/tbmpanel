@@ -3,6 +3,9 @@
 ### Table of contents
 1. [EVN configuration files](#env-config)
 2. [Webpack](#webpack)
+3. [Run environment](#run)
+4. [Test environment](#test)
+5. [License](#license)
 
 ######
 ##### EVN configuration files <a name="env-config"></a>
@@ -34,3 +37,23 @@ We find configuration files into the folder `./config`
 | plugins Array | HtmlWebpackPlugin | Used to inject bundle.js file into index.html template | https://github.com/jantimon/html-webpack-plugin |
 ######
 
+##### Run environment <a name="run"></a>
+
+TO DO
+
+##### Test environment <a name="test"></a>
+
+Testing a React-Redux app using Jest and Enzyme.
+
+We are going to use:
+`jest ` `babel-jest ` `enzyme  ` `react-addons-test-utils` `react-test-renderer` `redux-mock-store`
+
+Look at the [Link](https://medium.com/netscape/testing-a-react-redux-app-using-jest-and-enzyme-b349324803a9) for more info.
+
+#
+
+###### License <a name="license"></a>
+
+[Triboo SPA - ALL RIGHTS RESERVED](http://www.triboomedia.it/privacy-policy/)
+
+#
