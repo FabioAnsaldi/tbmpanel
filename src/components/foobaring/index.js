@@ -16,7 +16,7 @@ export class Foobaring extends Component {
         return (
             <div className="foobaring">
                 <button className="btn" onClick={letsGreeting}>Click me!</button><br/>
-                <strong>{this.props.foobaring.output}</strong>
+                <strong>{this.props.foobaringReducer.output}</strong>
             </div>
         );
     }
@@ -24,7 +24,7 @@ export class Foobaring extends Component {
 
 function mapStateToProps( state ) {
     return {
-        foobaring: state.foobaring
+        foobaringReducer: state.foobaringReducer
     };
 }
 

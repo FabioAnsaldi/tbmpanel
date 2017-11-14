@@ -7,12 +7,11 @@ import { combineReducers } from 'redux';
 import * as initialreducer from './index';
 import * as reducers from '../../components/**/reducer.js';
 
-let reduxsKeys = Object.keys( reducers );
 let reduxs = {
-    initialreducer: initialreducer.default
+    /*initialreducer: initialreducer.default*/
 };
-reduxsKeys.forEach( ( key ) => {
-    reduxs[ key ] = reducers[ key ];
+Object.keys( reducers ).forEach(  ( key ) => {
+    reduxs[ reducers[ key ].name ] = reducers[ key ];
 } );
 const combinedReducers = combineReducers( reduxs );
 

@@ -16,7 +16,7 @@ export class Greeting extends Component {
         return (
             <div className="greeting">
                 <button className="btn" onClick={letsGreeting}>Click me!</button><br/>
-                <strong>{this.props.greeting.output}</strong>
+                <strong>{this.props.greetingReducer.output}</strong>
             </div>
         );
     }
@@ -24,7 +24,7 @@ export class Greeting extends Component {
 
 function mapStateToProps( state ) {
     return {
-        greeting: state.greeting
+        greetingReducer: state.greetingReducer
     };
 }
 

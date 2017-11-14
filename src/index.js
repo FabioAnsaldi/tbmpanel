@@ -6,14 +6,14 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import main from './app/containers/main';
+import Main from './app/layout/main';
 import store from './app/store/configureStore';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 render(
     <Provider store={store}>
         <BrowserRouter>
-            <Route path="/" component={main}/>
+            <Main/>
         </BrowserRouter>
     </Provider>,
     document.getElementById( 'root' )

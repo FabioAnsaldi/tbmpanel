@@ -3,9 +3,11 @@
 ### Table of contents
 1. [EVN configuration files](#env-config)
 2. [Webpack](#webpack)
-3. [Run environment](#run)
-4. [Test environment](#test)
-5. [License](#license)
+3. [.babelrc](#babelrc)
+    1. [import-glob](#glob)
+4. [Run environment](#run)
+5. [Test environment](#test)
+6. [License](#license)
 
 ######
 ##### EVN configuration files <a name="env-config"></a>
@@ -37,10 +39,17 @@ We find configuration files into the folder `./config`
 | plugins Array | HtmlWebpackPlugin | Used to inject bundle.js file into index.html template | https://github.com/jantimon/html-webpack-plugin |
 ######
 
+##### .babelrc <a name="babelrc"></a>
+Here you can find plugins used into Webpack config that is not supported from Webpack's module plugins configuration.
+###### import-glob <a name="glob"></a>
+It is used to import all of reducer files from specific folder (components).
+
+######
 ##### Run environment <a name="run"></a>
 
 TO DO
 
+######
 ##### Test environment <a name="test"></a>
 
 Testing a React-Redux app using Jest and Enzyme.

@@ -9,6 +9,7 @@ const webpackDevMiddleware = require( 'webpack-dev-middleware' );
 const webpackHotMiddleware = require( 'webpack-hot-middleware' );
 const config = require( '../config/tbmpanel.config.js' );
 const webpackConfig = require( path.join( process.cwd(), config.paths.configuration + '/webpack.config' ) );
+const history = require( 'connect-history-api-fallback' );
 const express = require( 'express' );
 const app = new (express)();
 
@@ -18,10 +19,11 @@ const address = config.environment.develop.address || 'localhost';
 process.env.NODE_ENV = config.environment.develop.env;
 const compiler = webpack( webpackConfig );
 
+app.use( history() );
 app.use( webpackDevMiddleware( compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath } ) );
 app.use( webpackHotMiddleware( compiler ) );
 
-app.get( '/', function ( req, res, next ) {
+app.get( '*', function ( req, res, next ) {
     res.sendFile( path.join( process.cwd(), config.paths.source + '/index.html' ) );
 } );
 
