@@ -7,7 +7,7 @@ const initialState = [ {
     output: 'Report!'
 } ];
 
-const foobaringReducer = ( state = initialState, action ) => {
+const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'INITIAL_STATE':
             return Object.assign( {}, state, { 'output': action.output } );
@@ -16,4 +16,4 @@ const foobaringReducer = ( state = initialState, action ) => {
     }
 };
 
-export default foobaringReducer;
+export default reportReducer;

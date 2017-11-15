@@ -7,7 +7,7 @@ const initialState = [ {
     output: 'Use Redux'
 } ];
 
-const initialreducer = ( state = initialState, action ) => {
+const mainReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'INITIAL_STATE':
             return Object.assign( {}, state, { 'output': action.output } );
@@ -16,4 +16,4 @@ const initialreducer = ( state = initialState, action ) => {
     }
 };
 
-export default initialreducer;
+export default mainReducer;
