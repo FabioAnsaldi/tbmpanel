@@ -9,6 +9,8 @@ const initialState = [ {
 
 const foobaringReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
+        case 'INITIAL_STATE':
+            return Object.assign( {}, state, { 'output': action.output } );
         case 'FOOBAR':
             return Object.assign( {}, state, { 'output': action.output } );
         default:

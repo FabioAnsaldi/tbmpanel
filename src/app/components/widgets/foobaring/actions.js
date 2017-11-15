@@ -4,6 +4,13 @@
 
 'use strict';
 
+export const init = ( output ) => {
+    return {
+        type: "INITIAL_STATE",
+        output: output
+    };
+};
+
 export const bar = ( output ) => {
     return {
         type: "FOOBAR",

@@ -4,18 +4,16 @@
 
 'use strict';
 const initialState = [ {
-    output: 'Greeting!'
+    output: 'Home!'
 } ];
 
-const greetingReducer = ( state = initialState, action ) => {
+const foobaringReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'INITIAL_STATE':
-            return Object.assign( {}, state, { 'output': action.output } );
-        case 'SAY_HELLO':
             return Object.assign( {}, state, { 'output': action.output } );
         default:
             return state;
     }
 };
 
-export default greetingReducer;
+export default foobaringReducer;
