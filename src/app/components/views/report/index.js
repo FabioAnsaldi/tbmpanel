@@ -5,15 +5,16 @@
 'use strict';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Greeting from '../../components/greeting/index.js';
-import Foobaring from '../../components/foobaring/index.js';
+import { withRouter } from 'react-router'
+import Greeting from '../../widgets/greeting/index.js';
+import Foobaring from '../../widgets/foobaring/index.js';
 
-class Home extends Component {
+class Report extends Component {
     render() {
         return (
             <div>
-                <h2>Home page</h2>
-                <table  cellPadding="10" cellSpacing="0" width="100%">
+                <h2>Report page</h2>
+                <table cellPadding="10" cellSpacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>Greeting Component</th>
@@ -38,4 +39,4 @@ function mapStateToProps( state ) {
     };
 }
 
-export default connect( mapStateToProps )( Home );
+export default withRouter( connect( mapStateToProps )( Report ) );

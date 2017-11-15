@@ -4,9 +4,9 @@
 
 'use strict';
 
-export const initialization = ( output ) => {
+export const initialize = ( output ) => {
     return {
-        type: "INITIALIZATION",
+        type: "INITIAL_STATE",
         output: output
     };
 };

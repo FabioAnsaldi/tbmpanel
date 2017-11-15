@@ -4,13 +4,13 @@
 
 'use strict';
 import { createStore } from 'redux';
-import combinedReducers from '../reducers/combiner';
+import combinedReducers from './index';
 
 const store = createStore( combinedReducers );
 
 if ( module.hot ) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept( '../reducers', () => {
+    // Enable Webpack hot module replacement for combiner
+    module.hot.accept( '../combiner', () => {
         const nextReducer = combinedReducers;
         store.replaceReducer( nextReducer );
     } );

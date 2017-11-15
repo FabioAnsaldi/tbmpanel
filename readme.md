@@ -55,7 +55,7 @@ TO DO
 Testing a React-Redux app using Jest and Enzyme.
 
 We are going to use:
-`jest ` `babel-jest ` `enzyme  ` `react-addons-test-utils` `react-test-renderer` `redux-mock-store`
+`jest ` `babel-jest ` `enzyme  ` `react-addons-test-utils` `react-test-renderer` `redux-mock-combiner`
 
 Look at the [Link](https://medium.com/netscape/testing-a-react-redux-app-using-jest-and-enzyme-b349324803a9) for more info.
 

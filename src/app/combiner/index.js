@@ -4,11 +4,11 @@
 
 'use strict';
 import { combineReducers } from 'redux';
-import * as initialreducer from './index';
-import * as reducers from '../../components/**/reducer.js';
+import * as initialreducer from '../components/layouts/main/reducer';
+import * as reducers from '../components/**/reducer.js';
 
 let reduxs = {
-    /*initialreducer: initialreducer.default*/
+    initialreducer: initialreducer.default
 };
 Object.keys( reducers ).forEach(  ( key ) => {
     reduxs[ reducers[ key ].name ] = reducers[ key ];

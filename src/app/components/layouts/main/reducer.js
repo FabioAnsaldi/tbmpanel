@@ -9,7 +9,7 @@ const initialState = [ {
 
 const initialreducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'INITIALIZATION':
+        case 'INITIAL_STATE':
             return Object.assign( {}, state, { 'output': action.output } );
         default:
             return state;

@@ -6,9 +6,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import Main from './app/layout/main';
-import store from './app/store/configureStore';
 import { BrowserRouter } from 'react-router-dom';
+import Main from './app/components/layouts/main/index';
+import store from './app/combiner/store';
 
 render(
     <Provider store={store}>
