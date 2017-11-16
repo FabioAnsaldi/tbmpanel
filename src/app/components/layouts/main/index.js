@@ -17,10 +17,12 @@ class Main extends Component {
                 <ul>
                     <li><Link to={"/"}>Home</Link></li>
                     <li><Link to={"/report"}>Report</Link></li>
+                    <li><Link to={"/report/1234"}>Report 1234</Link></li>
                 </ul>
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/report" component={Report}/>
+                    <Route path="/report/:number" component={Report}/>
                 </Switch>
             </div>
         );

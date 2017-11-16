@@ -13,7 +13,7 @@ class Report extends Component {
     render() {
         return (
             <div>
-                <h2>Report page</h2>
+                <h2>Report {this.props.match.params.number}</h2>
                 <table cellPadding="10" cellSpacing="0" width="100%">
                     <thead>
                         <tr>

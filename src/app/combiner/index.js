@@ -10,7 +10,7 @@ import * as reducers from '../components/**/reducer.js';
 let reduxs = {
     mainReducer: mainReducer.default
 };
-Object.keys( reducers ).forEach(  ( key ) => {
+Object.keys( reducers ).forEach( ( key ) => {
     reduxs[ reducers[ key ].name ] = reducers[ key ];
 } );
 const combinedReducers = combineReducers( reduxs );
