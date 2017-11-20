@@ -3,14 +3,15 @@
  */
 
 'use strict';
-const initialState = [ {
+const initialState = {
+    type: 'INITIAL_STATE',
     output: 'Foo!'
-} ];
+};
 
 const foobaringReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'INITIAL_STATE':
-            return Object.assign( {}, state, { 'output': action.output } );
+            return Object.assign( {}, state, { 'output': initialState.output } );
         case 'FOOBAR':
             return Object.assign( {}, state, { 'output': action.output } );
         default:

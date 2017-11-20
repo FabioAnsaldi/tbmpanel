@@ -13,6 +13,6 @@ let reduxs = {
 Object.keys( reducers ).forEach( ( key ) => {
     reduxs[ reducers[ key ].name ] = reducers[ key ];
 } );
-const combinedReducers = combineReducers( reduxs );
+const combination = combineReducers( reduxs );
 
-export default combinedReducers;
+export default combination;

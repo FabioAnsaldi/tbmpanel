@@ -4,14 +4,14 @@
 
 'use strict';
 import { createStore } from 'redux';
-import combinedReducers from './index';
+import combination from './index';
 
-const store = createStore( combinedReducers );
+const store = createStore( combination );
 
 if ( module.hot ) {
     // Enable Webpack hot module replacement for combiner
     module.hot.accept( '../combiner', () => {
-        const nextReducer = combinedReducers;
+        const nextReducer = combination;
         store.replaceReducer( nextReducer );
     } );
 }

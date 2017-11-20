@@ -3,14 +3,15 @@
  */
 
 'use strict';
-const initialState = [ {
-    output: 'Greeting!'
-} ];
+const initialState = {
+    type: 'INITIAL_STATE',
+    output: 'I\' saying ...'
+};
 
 const greetingReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'INITIAL_STATE':
-            return Object.assign( {}, state, { 'output': action.output } );
+            return Object.assign( {}, state, { 'output': initialState.output } );
         case 'SAY_HELLO':
             return Object.assign( {}, state, { 'output': action.output } );
         default:

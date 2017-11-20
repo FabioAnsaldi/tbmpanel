@@ -13,7 +13,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h2>Home page</h2>
+                <h2>{this.props.homeReducer.output}</h2>
                 <table cellPadding="10" cellSpacing="0" width="100%">
                     <thead>
                     <tr>
@@ -35,7 +35,7 @@ class Home extends Component {
 
 function mapStateToProps( state ) {
     return {
-        initial: state.initial
+        homeReducer: state.homeReducer
     };
 }
 

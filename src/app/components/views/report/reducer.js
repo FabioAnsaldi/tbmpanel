@@ -3,14 +3,15 @@
  */
 
 'use strict';
-const initialState = [ {
-    output: 'Report!'
-} ];
+const initialState = {
+    type: 'INITIAL_STATE',
+    output: 'Report page'
+};
 
 const reportReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'INITIAL_STATE':
-            return Object.assign( {}, state, { 'output': action.output } );
+            return Object.assign( {}, state, { 'output': initialState.output } );
         default:
             return state;
     }
