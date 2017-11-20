@@ -24,7 +24,7 @@ We find configuration files into the folder `./config`
 | config.bundle | Contains bundle file name |
 
 
-`./config/webpack.config.js` It is used to set up Webpack module
+`./config/webpack.dev.js` It is used to set up Webpack module
 ######
 ##### Webpack <a name="webpack"></a>
  We use Webpack to run local environment (local server) and to build the project

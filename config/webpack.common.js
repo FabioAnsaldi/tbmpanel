@@ -9,9 +9,7 @@ const config = require( './tbmpanel.config.js' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
     entry: [
-        'webpack-hot-middleware/client',
         path.join( process.cwd(), config.paths.source + '/index' )
     ],
     output: {
@@ -20,7 +18,6 @@ module.exports = {
         publicPath: config.paths.assets
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin( {
             template: path.join( process.cwd(), config.paths.source + '/index.html' ),
             inject: 'body'
