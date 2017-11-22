@@ -4,8 +4,9 @@
   "description": "Triboo Media Panel project",
   "main": "index.js",
   "scripts": {
-    "start": "node ./servers/server.js",
     "build": "webpack --config ./config/webpack.prod.js",
+    "create": "node ./generator/index.js",
+    "start": "node ./servers/server.js",
     "test": "jest"
   },
   "repository": {
@@ -36,10 +37,12 @@
     "express": "^4.16.2",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
+    "inquirer": "^0.4.1",
     "jest": "^18.1.0",
     "react-addons-test-utils": "^15.4.1",
     "react-test-renderer": "^15.4.1",
     "redux-mock-store": "^1.2.1",
+    "string-template": "^1.0.0",
     "uglifyjs-webpack-plugin": "^1.1.0",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.12.0",

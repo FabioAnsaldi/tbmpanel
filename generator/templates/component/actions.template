@@ -1,0 +1,8 @@
+'use strict';
+
+export const init = ( output ) => {
+    return {
+        type: 'INITIAL_STATE',
+        output: output
+    };
+};

@@ -1,0 +1,17 @@
+'use strict';
+
+const initialState = {
+    type: 'INITIAL_STATE',
+    output: 'Use React with Redux'
+};
+
+const {name}Reducer = ( state = initialState, action ) => {
+    switch ( action.type ) {
+        case 'INITIAL_STATE':
+            return Object.assign( {}, state, { 'output': initialState.output } );
+        default:
+            return state;
+    }
+};
+
+export default {name}Reducer;
