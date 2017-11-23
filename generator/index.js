@@ -16,6 +16,7 @@ class Generator {
         let _templateName = this.options.templateName.toLowerCase();
         let _templateAbsolutePath = path.join( __dirname, this.options.customTemplatesUrl, '/' + _templateName );
         let _files = this.getTemplatesFiles( _templateAbsolutePath, [] );
+        this.options.newComponent = true;
 
         this.options = Object.assign( this.options, {
             templateAbsolutePath: _templateAbsolutePath,
@@ -43,10 +44,11 @@ class Generator {
                     }
                 }
                 if ( _files.length === 0 ) {
-                    throw new Error( 'No files found in custom templates url ' + _templateAbsolutePath + ' into template name' + _templateName );
+                    throw new Error( 'No files found in custom templates url ' + _dir );
                 }
-            } catch ( error ) {
-                throw error;
+            } catch ( _error ) {
+                console.log( '\x1b[31m%s\x1b[0m: ', 'Created: ' + _error.message );
+                process.exit( 0 );
             }
         }
         return _files;
@@ -57,18 +59,24 @@ class Generator {
      * @description It makes a simple list form which you have to choose the type of the component
      */
     generateTemplate() {
+        let callback = ( answers ) => {
+            try {
+                if ( typeof answers.componentType === 'string' ) {
+                    this.options.componentType = answers.componentType.toLowerCase() + 's';
+                    return this.askNameComponent();
+                }
+                throw new Error( 'Component not chosen. System error!' );
+            } catch ( _error ) {
+                console.log( '\x1b[31m%s\x1b[0m: ', 'Created: ' + _error.message );
+                process.exit( 0 );
+            }
+        };
         inquirer.prompt( {
             type: 'list',
             message: 'Choose component type',
             name: 'componentType',
             choices: [ new inquirer.Separator(), 'Layout', 'View', 'Widget', new inquirer.Separator() ]
-        }, ( answers ) => {
-            if ( typeof answers.componentType === 'string' ) {
-                this.options.componentType = answers.componentType.toLowerCase() + 's';
-                return this.askNameComponent();
-            }
-            throw new Error( 'Component not chosen. System error!' );
-        } );
+        }, callback );
     }
 
     /**
@@ -76,17 +84,23 @@ class Generator {
      * @description It makes a simple input form where you have to put the name of the component
      */
     askNameComponent() {
+        let callback = ( answers ) => {
+            try {
+                if ( typeof answers.componentName === 'string' ) {
+                    this.options.componentName = answers.componentName.toLowerCase();
+                    return this.makeTemplatesFiles();
+                }
+                throw new Error( 'Component name empty or system error!' );
+            } catch ( _error ) {
+                console.log( '\x1b[31m%s\x1b[0m: ', 'Created: ' + _error.message );
+                process.exit( 0 );
+            }
+        };
         inquirer.prompt( {
             type: 'input',
             message: 'Put the component name',
             name: 'componentName',
-        }, ( answers ) => {
-            if ( typeof answers.componentName === 'string' ) {
-                this.options.componentName = answers.componentName.toLowerCase();
-                return this.makeTemplatesFiles();
-            }
-            throw new Error( 'Component name empty or system error!' );
-        } );
+        }, callback );
     }
 
     /**
@@ -100,35 +114,50 @@ class Generator {
             if ( this.options.dest ) {
                 dest = this.options.dest + '/' + dest;
             }
-            fs.readFile( absoluteTemplatePath, 'utf8', ( err, data ) => {
-                if ( err ) {
-                    throw err;
+            let callback = ( err, data ) => {
+                try {
+                    if ( err ) {
+                        throw err;
+                    }
+                    let templateFilepath = absoluteTemplatePath.replace( /^.*[\\\/]/, '' );
+                    templateFilepath = templateFilepath.replace( '.template', '.js' );
+                    let templatePathWithoutFileName = templateFilepath.substring( 0, templateFilepath.lastIndexOf( '/' ) );
+                    let fileData = {
+                        destinationFilePath: dest + this.options.componentName + '/' + templateFilepath,
+                        destinationFolderPath: dest + templatePathWithoutFileName + '/' + this.options.componentName,
+                        fileContent: data
+                    };
+                    return this.makeComponentFolder( fileData );
+                } catch ( _error ) {
+                    console.log( '\x1b[31m%s\x1b[0m: ', 'Created: ' + _error.message );
+                    process.exit( 0 );
                 }
-                let templateFilepath = absoluteTemplatePath.replace( /^.*[\\\/]/, '' );
-                templateFilepath = templateFilepath.replace( '.template', '.js' );
-                let templatePathWithoutFileName = templateFilepath.substring( 0, templateFilepath.lastIndexOf( '/' ) );
-                let fileData = {
-                    destinationFilePath: dest + this.options.componentName + '/' + templateFilepath,
-                    destinationFolderPath: dest + templatePathWithoutFileName + '/' + this.options.componentName,
-                    fileContent: data
-                };
-                return this.makeComponentFolder( fileData );
-            } );
+            };
+            fs.readFile( absoluteTemplatePath, 'utf8', callback );
         }
         return true;
     }
 
+    /**
+     * @name makeComponentFolder
+     * @description It makes the component folder on file system
+     * @param {object} _fileData - It contains folder paths properties
+     */
     makeComponentFolder( _fileData ) {
         if ( !fs.existsSync( _fileData.destinationFolderPath ) ) {
-            fs.mkdir( _fileData.destinationFolderPath, ( err ) => {
-                if ( err ) {
-                    throw err;
-                }
-            } );
+            fs.mkdirSync( _fileData.destinationFolderPath );
+            this.options.newComponent = false;
+        } else if ( this.options.newComponent ) {
+            throw new Error( 'Component name already exist! Be sure to give a new name component.' );
         }
         return this.makePlaceholderReplacing( _fileData );
     }
 
+    /**
+     * @name makePlaceholderReplacing
+     * @description It replaces placeholder marker with component data and write a content into the specific file
+     * @param {object} _fileData - It contains component data
+     */
     makePlaceholderReplacing( _fileData ) {
         let injectedData = {
             name: this.options.componentName,
@@ -136,12 +165,18 @@ class Generator {
         };
         this.options.data = Object.assign( this.options.data, injectedData );
         let formattedData = stringTemplate( _fileData.fileContent, this.options.data );
-        fs.writeFile( _fileData.destinationFilePath, formattedData, ( err ) => {
-            if ( err ) {
-                throw err;
+        let callback = ( err ) => {
+            try {
+                if ( err ) {
+                    throw err;
+                }
+                console.log( '\x1b[32m%s\x1b[0m: ', 'Created: ' + _fileData.destinationFilePath );
+            } catch ( _error ) {
+                console.log( '\x1b[31m%s\x1b[0m: ', 'Created: ' + _error.message );
+                process.exit( 0 );
             }
-            console.log( '\x1b[32m%s\x1b[0m: ', 'Created: ' + _fileData.destinationFilePath );
-        } );
+        };
+        fs.writeFile( _fileData.destinationFilePath, formattedData, callback );
     }
 
     /**
