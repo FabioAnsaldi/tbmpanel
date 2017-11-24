@@ -24,7 +24,7 @@ exports.environment = {
     },
     production: {
         env: 'production',
-        address: '192.168.0.104',
+        address: 'localhost.mydomain.com',
         port: '8080'
     }
 };

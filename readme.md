@@ -5,9 +5,10 @@
 2. [Webpack](#webpack)
 3. [.babelrc](#babelrc)
     1. [import-glob](#glob)
-4. [Run environment](#run)
-5. [Test environment](#test)
-6. [License](#license)
+4. [Create component](#create)
+5. [Run environment](#run)
+6. [Test environment](#test)
+7. [License](#license)
 
 ######
 ##### EVN configuration files <a name="env-config"></a>
@@ -43,6 +44,14 @@ We find configuration files into the folder `./config`
 Here you can find plugins used into Webpack config that is not supported from Webpack's module plugins configuration.
 ###### import-glob <a name="glob"></a>
 It is used to import all of reducer files from specific folder (components).
+
+######
+##### Create component <a name="create"></a>
+To create a new component inside the application scaffold:
+```sh
+npm run create
+```
+> It drive you step by step to create a new component
 
 ######
 ##### Run environment <a name="run"></a>

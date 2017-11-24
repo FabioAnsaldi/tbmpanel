@@ -21,8 +21,7 @@ module.exports = {
         new HtmlWebpackPlugin( {
             template: path.join( process.cwd(), config.paths.source + '/index.html' ),
             inject: 'body'
-        } ),
-        new webpack.DefinePlugin( {} ),
+        } )
     ],
     module: {
         rules: [ {

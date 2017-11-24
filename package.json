@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --config ./config/webpack.prod.js",
     "create": "node ./generator/index.js",
-    "start": "node ./servers/server.js",
+    "start": "node ./servers/dev.server.js",
+    "prod": "node ./servers/prod.server.js",
     "test": "jest"
   },
   "repository": {
@@ -34,7 +35,6 @@
     "babel-preset-react": "^6.24.1",
     "connect-history-api-fallback": "^1.5.0",
     "enzyme": "^2.7.0",
-    "express": "^4.16.2",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
     "inquirer": "^0.4.1",
@@ -51,7 +51,12 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "material-ui": "^1.0.0-beta.21",
+    "passport": "^0.4.0",
+    "passport-google-oauth2": "^0.1.6",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
