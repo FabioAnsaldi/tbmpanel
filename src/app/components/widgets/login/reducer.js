@@ -3,18 +3,16 @@
 const initialState = {
     type: 'INITIAL_STATE',
     title: 'Login Form',
-    username: '',
-    password: ''
+    label: 'Sing in with Google',
+    user: {}
 };
 
 const loginReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case 'INITIAL_STATE':
-            return Object.assign( {}, state, { 'title': initialState.title } );
-        case 'USERNAME_CHANGE':
-            return Object.assign( {}, state, { 'username': action.username } );
-        case 'PASSWORD_CHANGE':
-            return Object.assign( {}, state, { 'password': action.password } );
+            return Object.assign( {}, state, { 'title': initialState.title, 'label': initialState.label, 'user': initialState.user } );
+        case 'USER_SINGIN':
+            return Object.assign( {}, state, { 'label': action.label, 'user': action.user } );
         default:
             return state;
     }

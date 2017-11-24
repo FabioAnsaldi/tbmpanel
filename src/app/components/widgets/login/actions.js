@@ -3,20 +3,16 @@
 export const init = ( input ) => {
     return {
         type: 'INITIAL_STATE',
-        title: input
+        title: input.title,
+        label: input.label,
+        user: input.user
     };
 };
 
-export const usernameChange = ( input ) => {
+export const userSingIn = ( input ) => {
     return {
-        type: 'USERNAME_CHANGE',
-        username: input
-    };
-};
-
-export const passwordChange = ( input ) => {
-    return {
-        type: 'PASSWORD_CHANGE',
-        password: input
+        type: 'USER_SINGIN',
+        label: input.label,
+        user: input.user
     };
 };
