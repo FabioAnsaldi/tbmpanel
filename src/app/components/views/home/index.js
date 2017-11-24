@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Greeting from '../../widgets/greeting/index.js';
 import Foobaring from '../../widgets/foobaring/index.js';
+import Login from '../../widgets/login/index.js';
 
 class Home extends Component {
     render() {
@@ -16,16 +17,18 @@ class Home extends Component {
                 <h2>{this.props.homeReducer.output}</h2>
                 <table cellPadding="10" cellSpacing="0" width="100%">
                     <thead>
-                    <tr>
-                        <th>Greeting Component</th>
-                        <th>Foobaring Component</th>
-                    </tr>
+                        <tr>
+                            <th>Greeting Component</th>
+                            <th>Foobaring Component</th>
+                            <th>Login Component</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td align="center"><Greeting/></td>
-                        <td align="center"><Foobaring/></td>
-                    </tr>
+                        <tr>
+                            <td align="center"><Greeting/></td>
+                            <td align="center"><Foobaring/></td>
+                            <td align="center"><Login/></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bar } from './actions';
+import Button from 'material-ui/Button';
 
 export class Foobaring extends Component {
 
@@ -15,7 +16,8 @@ export class Foobaring extends Component {
         };
         return (
             <div className="foobaring">
-                <button className="btn" onClick={letsGreeting}>Click me!</button><br/>
+                <Button raised onClick={letsGreeting} color="primary">Click me!</Button>
+                <br/>
                 <strong>{this.props.foobaringReducer.output}</strong>
             </div>
         );
