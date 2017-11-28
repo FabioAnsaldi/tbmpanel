@@ -6,10 +6,13 @@ import * as {name}Actions from './actions';
 import * as {name}Functions from './functions';
 
 export class {Name} extends Component {
-    let onSomething = () => {
-        {name}Functions.something( this.props );
-    };
     render() {
+        let onSomething = () => {
+            {name}Functions.something( this.props );
+        };
+        let onOnotherThing = () => {
+            this.props.dispatch( {name}Actions.someAction( result ) );
+        };
         return (
             <div className="{name}">{this.props.{name}Reducer.output}</div>
         );

@@ -13,7 +13,6 @@ const port = config.environment.production.port || 9000;
 const address = config.environment.production.address || 'localhost';
 process.env.NODE_ENV = config.environment.production.env;
 
-//app.use( history() );
 app.use( express.static( path.join( process.cwd(), config.paths.build ) ) );
 app.get( '/', ( req, res, next ) => {
     res.sendFile( path.join( process.cwd(), config.paths.build + '/index.html' ) );
