@@ -10,7 +10,16 @@ const uglifyJSPlugin = require( 'uglifyjs-webpack-plugin' );
 
 module.exports = merge( common, {
     plugins: [
-        new uglifyJSPlugin(),
+        new uglifyJSPlugin( {
+            uglifyOptions: {
+                compress: {
+                    keep_fnames: true
+                },
+                mangle: {
+                    keep_fnames: true
+                }
+            }
+        } ),
         new webpack.DefinePlugin( {
             'process.env': {
                 'NODE_ENV': JSON.stringify( 'production' )

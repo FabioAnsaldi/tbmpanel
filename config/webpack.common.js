@@ -4,7 +4,6 @@
 
 'use strict';
 const path = require( 'path' );
-const webpack = require( 'webpack' );
 const config = require( './tbmpanel.config.js' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 
