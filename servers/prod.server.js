@@ -5,7 +5,6 @@
 'use strict';
 const path = require( 'path' );
 const config = require( '../config/tbmpanel.config.js' );
-const history = require( 'connect-history-api-fallback' );
 const express = require( 'express' );
 const app = new (express)();
 

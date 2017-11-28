@@ -2,19 +2,44 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
+import TextField from 'material-ui/TextField';
 import * as loginActions from './actions';
+import * as loginFunctions from './functions';
 
 export class Login extends Component {
     render() {
-        let onSingInClick = () => {
-            this.props.dispatch( loginActions.userSingIn( { label: 'Sing Out', user: 'Fabio Ansaldi' } ) );
+        let onSignInClick = () => {
+            loginFunctions.login( this.props );
+        };
+        let onGoogleSignInClick = () => {
+            console.log( this.props );
+        };
+        let onNameChange = ( event ) => {
+            this.props.dispatch( loginActions.userNameChange( event.target.value ) );
+        };
+        let onPasswordChange = ( event ) => {
+            this.props.dispatch( loginActions.userPasswordChange( event.target.value ) );
         };
         return (
             <div className="login">
                 <h4>{this.props.loginReducer.title}</h4>
-                <Button raised onClick={onSingInClick} component={Link} to={"/login"} color="accent">{this.props.loginReducer.label}</Button>
+                <div className="form">
+                    <TextField type="text" name="username" placeholder={this.props.loginReducer.labelusername} onChange={onNameChange}/>
+                    <br/>
+                    <TextField type="password" name="password" placeholder={this.props.loginReducer.labelpassword} onChange={onPasswordChange}/>
+                    <p>
+                        <Button raised onClick={onSignInClick} color="primary">{this.props.loginReducer.labelsubmit}</Button>
+                    </p>
+                </div>
+                <p>
+                    <strong>or</strong>
+                </p>
+                <p>
+                    <Button raised onClick={onGoogleSignInClick} color="accent">{this.props.loginReducer.googleStatus}</Button>
+                </p>
+                <strong>error: [{this.props.loginReducer.error}]</strong>
+                <strong>logged: [{this.props.loginReducer.logged.toString()}]</strong>
             </div>
         );
     }

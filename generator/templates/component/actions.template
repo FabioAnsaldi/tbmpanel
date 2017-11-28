@@ -1,8 +1,8 @@
 'use strict';
 
-export const init = ( input ) => {
+export const reset = ( input ) => {
     return {
-        type: 'INITIAL_STATE',
+        type: 'RESET_STATE',
         output: input
     };
 };

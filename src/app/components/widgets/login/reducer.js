@@ -1,18 +1,29 @@
 'use strict';
 
 const initialState = {
-    type: 'INITIAL_STATE',
-    title: 'Login Form',
-    label: 'Sing in with Google',
-    user: {}
+    title: 'Sign In Form',
+    googleStatus: 'Sing in with Google',
+    labelsubmit: 'Sign in',
+    labelusername: 'Username',
+    username: '',
+    labelpassword: 'Password',
+    password: '',
+    logged: false,
+    error: ''
 };
 
 const loginReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'INITIAL_STATE':
-            return Object.assign( {}, state, { 'title': initialState.title, 'label': initialState.label, 'user': initialState.user } );
+        case 'RESET_STATE':
+            return Object.assign( {}, state, initialState );
+        case 'USER_NAME_CHANGE':
+            return Object.assign( {}, state, { 'username': action.username } );
+        case 'USER_PASSWORD_CHANGE':
+            return Object.assign( {}, state, { 'password': action.password } );
         case 'USER_SINGIN':
-            return Object.assign( {}, state, { 'label': action.label, 'user': action.user } );
+            return Object.assign( {}, state, { 'logged': action.logged } );
+        case 'ERROR_SINGIN':
+            return Object.assign( {}, state, { 'error': action.error } );
         default:
             return state;
     }

@@ -1,0 +1,16 @@
+'use strict';
+
+import * as {name}Actions from './actions';
+
+const doSomething = ( reducer ) => {
+    /* TODO */
+    return false;
+};
+
+export const something = ( state ) => {
+    let result = doSomething( state.{name}Reducer );
+    /**
+     * TODO
+     * state.dispatch( {name}Actions.someAction( result ) );
+     */
+};
