@@ -2,7 +2,7 @@
 
 import * as {name}Actions from './actions';
 
-const doSomething = ( reducer ) => {
+const doSomething = ( props ) => {
     /* TODO */
     return false;
 };

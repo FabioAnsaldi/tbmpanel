@@ -2,10 +2,10 @@
 
 import * as loginActions from './actions';
 
-const doLogin = ( state ) => {
+const doLogin = ( props ) => {
     return new Promise( ( fulfill, reject ) => {
         setTimeout( () => {
-            if ( state.username && state.password ) {
+            if ( props.username && props.password ) {
                 return fulfill( true );
             } else {
                 return reject( false );
