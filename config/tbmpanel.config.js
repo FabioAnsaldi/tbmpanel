@@ -16,6 +16,19 @@ exports.paths = {
     bundle: 'bundle.js'
 };
 
+/**
+ *  The On Authentication 2.0 properties to Sign In with JSON Web Tokens method
+ */
+exports.OAuth2 = {
+    AuthorityServerUrl: 'http://leonardodev02:8041/oauth2/token',
+    secretKey: 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc',
+    clientID: '49119a85f47846e29f3e6d357546e851',
+    grantType: 'password'
+};
+
+/**
+ *  The main properties of your project environments
+ */
 exports.environment = {
     develop: {
         env: 'development',
