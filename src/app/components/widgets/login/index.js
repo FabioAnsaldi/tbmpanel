@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import * as loginActions from './actions';
@@ -11,9 +12,6 @@ export class Login extends Component {
     render() {
         let onSignInClick = () => {
             loginFunctions.login( this.props );
-        };
-        let onGoogleSignInClick = () => {
-            console.log( this.props );
         };
         let onNameChange = ( event ) => {
             this.props.dispatch( loginActions.userNameChange( event.target.value ) );
@@ -36,7 +34,7 @@ export class Login extends Component {
                     <strong>or</strong>
                 </p>
                 <p>
-                    <Button raised onClick={onGoogleSignInClick} color="accent">{this.props.loginReducer.googleStatus}</Button>
+                    <Button raised href={"/login/google"} color="accent">{this.props.loginReducer.googleStatus}</Button>
                 </p>
                 <strong>error: [{this.props.loginReducer.error}]</strong>
                 <strong>logged: [{this.props.loginReducer.logged.toString()}]</strong>

@@ -26,12 +26,24 @@ exports.OAuth2 = {
 };
 
 /**
+ *  The Google On Authentication 2.0 properties to Sign In with JSON Web Tokens method
+ */
+exports.googleOAuth2 = {
+    clientID: '794512124618-7ivlr3ddrpsnmvfup2d7dom2u6v4pmmm.apps.googleusercontent.com',
+    callbackURL: '/login/google/callback',
+    passReqToCallback: true,
+    scope: [
+        'https://www.googleapis.com/auth/plus.login',
+        'https://www.googleapis.com/auth/plus.profile.emails.read' ]
+};
+
+/**
  *  The main properties of your project environments
  */
 exports.environment = {
     develop: {
         env: 'development',
-        address: '127.0.0.1',
+        address: 'localhost',
         port: '3000'
     },
     production: {

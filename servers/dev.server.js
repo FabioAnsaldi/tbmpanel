@@ -14,6 +14,7 @@ const express = require( 'express' );
 const app = new (express)();
 const passport = require( 'passport' );
 const LocalStrategy = require( 'passport-local' ).Strategy;
+const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const bodyParser = require( 'body-parser' );
 const request = require( 'request' );
 const jwt = require( 'jwt-simple' );
@@ -25,21 +26,16 @@ config.OAuth2.secretKey = 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc';
 process.env.NODE_ENV = config.environment.develop.env;
 const compiler = webpack( webpackConfig );
 
-app.use( history() );
 app.use( webpackDevMiddleware( compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath } ) );
 app.use( webpackHotMiddleware( compiler ) );
 
-app.get( '/', function ( req, res, next ) {
-    res.sendFile( path.join( process.cwd(), config.paths.source + '/index.html' ) );
-} );
-
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended: true } ) );
-let params = {
-    url: config.OAuth2.AuthorityServerUrl,
-    form: { client_id: config.OAuth2.clientID, grant_type: config.OAuth2.grantType }
-};
 passport.use( new LocalStrategy( ( username, password, done ) => {
+        let params = {
+            url: config.OAuth2.AuthorityServerUrl,
+            form: { client_id: config.OAuth2.clientID, grant_type: config.OAuth2.grantType }
+        };
         params.form = Object.assign( {}, params.form, { username: username, password: password } );
         request.post( params, ( err, httpResponse, body ) => {
             if ( err ) {
@@ -65,9 +61,37 @@ passport.use( new LocalStrategy( ( username, password, done ) => {
         } );
     }
 ) );
+passport.use( new GoogleStrategy( {
+        clientID: config.googleOAuth2.clientID,
+        clientSecret: 'hEiAUQjIh7v-s83LI9SKa7EB',
+        callbackURL: config.googleOAuth2.callbackURL,
+        passReqToCallback: config.googleOAuth2.passReqToCallback
+    },
+    ( request, accessToken, refreshToken, profile, done ) => {
+        process.nextTick( () => {
+            return done( null, profile );
+        } );
+    }
+) );
 app.use( passport.initialize() );
 app.post( '/login', passport.authenticate( 'local', { session: false } ), ( req, res ) => {
     res.send( req.user );
+} );
+app.get( '/login/google', passport.authenticate( 'google', {
+    session: false,
+    scope: config.googleOAuth2.scope
+} ) );
+app.get( '/login/google/callback', passport.authenticate( 'google', {
+    session: false,
+    failureRedirect: '/'
+} ), ( req, res ) => {
+    console.log( req.user );
+    res.redirect( '/' );
+} );
+
+app.use( history() );
+app.get( '/', ( req, res, next ) => {
+    res.sendFile( path.join( process.cwd(), config.paths.source + '/index.html' ) );
 } );
 
 app.set( 'address', address );
