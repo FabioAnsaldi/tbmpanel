@@ -21,6 +21,7 @@ const jwt = require( 'jwt-simple' );
 /* Environment configuration constant */
 const port = config.environment.develop.port || 9000;
 const address = config.environment.develop.address || 'localhost';
+config.OAuth2.secretKey = 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc';
 process.env.NODE_ENV = config.environment.develop.env;
 const compiler = webpack( webpackConfig );
 

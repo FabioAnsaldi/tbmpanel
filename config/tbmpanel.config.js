@@ -21,7 +21,6 @@ exports.paths = {
  */
 exports.OAuth2 = {
     AuthorityServerUrl: 'http://leonardodev02:8041/oauth2/token',
-    secretKey: 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc',
     clientID: '49119a85f47846e29f3e6d357546e851',
     grantType: 'password'
 };

@@ -16,6 +16,7 @@ const jwt = require( 'jwt-simple' );
 /* Environment configuration constant */
 const port = config.environment.production.port || 9000;
 const address = config.environment.production.address || 'localhost';
+config.OAuth2.secretKey = 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc';
 process.env.NODE_ENV = config.environment.production.env;
 
 app.use( express.static( path.join( process.cwd(), config.paths.build ) ) );
