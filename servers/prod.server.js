@@ -6,9 +6,12 @@
 const path = require( 'path' );
 const config = require( '../config/tbmpanel.config.js' );
 const express = require( 'express' );
+const session = require( 'express-session' );
+const cookieParser = require( 'cookie-parser' );
 const app = new (express)();
 const passport = require( 'passport' );
 const LocalStrategy = require( 'passport-local' ).Strategy;
+const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const bodyParser = require( 'body-parser' );
 const request = require( 'request' );
 const jwt = require( 'jwt-simple' );
@@ -19,18 +22,29 @@ const address = config.environment.production.address || 'localhost';
 config.OAuth2.secretKey = 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc';
 process.env.NODE_ENV = config.environment.production.env;
 
-app.use( express.static( path.join( process.cwd(), config.paths.build ) ) );
-app.get( '/', ( req, res, next ) => {
-    res.sendFile( path.join( process.cwd(), config.paths.build + '/index.html' ) );
-} );
-
+app.use( cookieParser() );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended: true } ) );
-let params = {
-    url: config.OAuth2.AuthorityServerUrl,
-    form: { client_id: config.OAuth2.clientID, grant_type: config.OAuth2.grantType }
-};
+passport.serializeUser( ( user, done ) => {
+    done( null, user );
+} );
+passport.deserializeUser( ( obj, done ) => {
+    done( null, obj );
+} );
+app.use( session( {
+    secret: 'keyboard crazy cat',
+    name: 'tbmpanel',
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+} ) );
+app.use( passport.initialize() );
+app.use( passport.session() );
 passport.use( new LocalStrategy( ( username, password, done ) => {
+        let params = {
+            url: config.OAuth2.AuthorityServerUrl,
+            form: { client_id: config.OAuth2.clientID, grant_type: config.OAuth2.grantType }
+        };
         params.form = Object.assign( {}, params.form, { username: username, password: password } );
         request.post( params, ( err, httpResponse, body ) => {
             if ( err ) {
@@ -43,12 +57,13 @@ passport.use( new LocalStrategy( ( username, password, done ) => {
                 // Support for nbf and exp claims.
                 // According to the RFC, they should be in seconds.
                 do {
+                    if ( Date.now() > bodyJSON.nbf * 1000 + 1000 ) { // one second more
+                        throw new Error( 'Server timeOut error' );
+                    }
                     try {
                         decoded = jwt.decode( bodyJSON.access_token, bufSecret );
-                    } catch ( e ) {
-                        if ( Date.now() > bodyJSON.nbf * 1000 + 1000 ) { // one second more
-                            return done( new Error( 'Server timeOut error' ) );
-                        }
+                    } catch ( err ) {
+                        return done( err );
                     }
                 } while ( bodyJSON.nbf && Date.now() < bodyJSON.nbf * 1000 );
                 return done( null, decoded );
@@ -56,9 +71,28 @@ passport.use( new LocalStrategy( ( username, password, done ) => {
         } );
     }
 ) );
-app.use( passport.initialize() );
+passport.use( new GoogleStrategy( {
+        clientID: config.googleOAuth2.clientID,
+        clientSecret: 'hEiAUQjIh7v-s83LI9SKa7EB',
+        callbackURL: config.googleOAuth2.callbackURL,
+        passReqToCallback: config.googleOAuth2.passReqToCallback
+    },
+    ( request, accessToken, refreshToken, profile, done ) => {
+        process.nextTick( () => {
+            return done( null, profile );
+        } );
+    }
+) );
+
 app.post( '/login', passport.authenticate( 'local', { session: false } ), ( req, res ) => {
     res.send( req.user );
+} );
+app.get( '/login/google', passport.authenticate( 'google', { scope: config.googleOAuth2.scope } ) );
+app.get( '/login/google/callback', passport.authenticate( 'google', { successRedirect: '/', failureRedirect: '/' } ) );
+
+app.use( express.static( path.join( process.cwd(), config.paths.build ) ) );
+app.get( '/', ( req, res, next ) => {
+    res.sendFile( path.join( process.cwd(), config.paths.build + '/index.html' ) );
 } );
 
 app.set( 'address', address );

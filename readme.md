@@ -7,6 +7,8 @@
     1. [import-glob](#glob)
 4. [Create component](#create)
 5. [Run environment](#run)
+    1. [Run production environment](#production)
+    2. [Run develop environment](#develop)
 6. [Test environment](#test)
 7. [License](#license)
 
@@ -18,11 +20,28 @@ We find configuration files into the folder `./config`
 
 | Property | Description |
 | --- | --- |
-| config.configuration | Contains configuration folder path |
-| config.source | Contains source folder path |
-| config.development | Contains development folder path |
-| config.production | Contains production folder path |
-| config.bundle | Contains bundle file name |
+| config.paths.assets | Contains root path |
+| config.paths.bundle | Contains bundle file JS name |
+| config.paths.build | Contains build folder path |
+| config.paths.configuration | Contains config folder path |
+| config.paths.source | Contains source folder path |
+| | |
+| config.OAuth2.AuthorityServerUrl | Contains the API Url to get Token |
+| config.OAuth2.clientID | Contains application number to require authentication at API Url |
+| config.OAuth2.build | Contains build folder path |
+| config.OAuth2.grantType | Contains the command for the API Url |
+| | |
+| config.googleOAuth2.callbackURL | Contains the TBMpanel for redirect after authentication |
+| config.googleOAuth2.clientID | Contains application number to require authentication at API Url |
+| config.googleOAuth2.passReqToCallback | Contains enable callback flag |
+| config.googleOAuth2.scope | Contains available API resource |
+| | |
+| config.environment.develop.env | Contains develop environment identifier |
+| config.environment.develop.address | Contains develop application hostname |
+| config.environment.develop.port | Contains develop application port |
+| config.environment.production.env | Contains production environment identifier |
+| config.environment.production | Contains production application hostname |
+| config.environment.production | Contains production application port |
 
 
 `./config/webpack.dev.js` It is used to set up Webpack module
@@ -54,14 +73,32 @@ npm run create
 > It drive you step by step to create a new component
 
 ######
-##### Run environment <a name="run"></a>
-
-TO DO
+#### Run environment <a name="run"></a>
+There are different environment which you can run
 
 ######
-##### Test environment <a name="test"></a>
+##### Run production environment <a name="production"></a>
+To run the production environment buided previously:
+```sh
+npm run prod
+```
+> It runs application with production configuration
 
-Testing a React-Redux app using Jest and Enzyme.
+######
+##### Run develop environment <a name="develop"></a>
+To run the develop environment buided previously:
+```sh
+npm run start
+```
+> It runs application with develop configuration
+
+######
+##### Test application <a name="test"></a>
+To run application test
+```sh
+npm run test
+```
+> Testing a React-Redux application using Jest and Enzyme.
 
 We are going to use:
 `jest ` `babel-jest ` `enzyme  ` `react-addons-test-utils` `react-test-renderer` `redux-mock-combiner`

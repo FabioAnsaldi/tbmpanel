@@ -3,7 +3,6 @@
  */
 
 'use strict';
-const path = require( 'path' );
 
 /**
  *  The main paths of your project handle these with care

@@ -26,8 +26,8 @@ const port = config.environment.develop.port || 9000;
 const address = config.environment.develop.address || 'localhost';
 config.OAuth2.secretKey = 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc';
 process.env.NODE_ENV = config.environment.develop.env;
-const compiler = webpack( webpackConfig );
 
+const compiler = webpack( webpackConfig );
 app.use( webpackDevMiddleware( compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath } ) );
 app.use( webpackHotMiddleware( compiler ) );
 
@@ -66,12 +66,13 @@ passport.use( new LocalStrategy( ( username, password, done ) => {
                 // Support for nbf and exp claims.
                 // According to the RFC, they should be in seconds.
                 do {
+                    if ( Date.now() > bodyJSON.nbf * 1000 + 1000 ) { // one second more
+                        throw new Error( 'Server timeOut error' );
+                    }
                     try {
                         decoded = jwt.decode( bodyJSON.access_token, bufSecret );
-                    } catch ( e ) {
-                        if ( Date.now() > bodyJSON.nbf * 1000 + 1000 ) { // one second more
-                            return done( new Error( 'Server timeOut error' ) );
-                        }
+                    } catch ( err ) {
+                        return done( err );
                     }
                 } while ( bodyJSON.nbf && Date.now() < bodyJSON.nbf * 1000 );
                 return done( null, decoded );
