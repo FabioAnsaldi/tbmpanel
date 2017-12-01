@@ -22,6 +22,7 @@ const doLogin = ( props ) => {
                 headers.append( 'Content-Type', 'application/x-www-form-urlencoded' );
                 let init = {
                     method: 'POST',
+                    credentials: 'include',
                     headers: headers,
                     body: doQueryString( {
                         username: props.username,

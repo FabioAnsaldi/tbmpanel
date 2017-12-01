@@ -11,6 +11,8 @@ const config = require( '../config/tbmpanel.config.js' );
 const webpackConfig = require( path.join( process.cwd(), config.paths.configuration + '/webpack.dev' ) );
 const history = require( 'connect-history-api-fallback' );
 const express = require( 'express' );
+const session = require( 'express-session' );
+const cookieParser = require( 'cookie-parser' );
 const app = new (express)();
 const passport = require( 'passport' );
 const LocalStrategy = require( 'passport-local' ).Strategy;
@@ -29,8 +31,24 @@ const compiler = webpack( webpackConfig );
 app.use( webpackDevMiddleware( compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath } ) );
 app.use( webpackHotMiddleware( compiler ) );
 
+app.use( cookieParser() );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended: true } ) );
+passport.serializeUser( ( user, done ) => {
+    done( null, user );
+} );
+passport.deserializeUser( ( obj, done ) => {
+    done( null, obj );
+} );
+app.use( session( {
+    secret: 'keyboard crazy cat',
+    name: 'tbmpanel',
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+} ) );
+app.use( passport.initialize() );
+app.use( passport.session() );
 passport.use( new LocalStrategy( ( username, password, done ) => {
         let params = {
             url: config.OAuth2.AuthorityServerUrl,
@@ -73,21 +91,11 @@ passport.use( new GoogleStrategy( {
         } );
     }
 ) );
-app.use( passport.initialize() );
-app.post( '/login', passport.authenticate( 'local', { session: false } ), ( req, res ) => {
+app.post( '/login', passport.authenticate( 'local' ), ( req, res ) => {
     res.send( req.user );
 } );
-app.get( '/login/google', passport.authenticate( 'google', {
-    session: false,
-    scope: config.googleOAuth2.scope
-} ) );
-app.get( '/login/google/callback', passport.authenticate( 'google', {
-    session: false,
-    failureRedirect: '/'
-} ), ( req, res ) => {
-    console.log( req.user );
-    res.redirect( '/' );
-} );
+app.get( '/login/google', passport.authenticate( 'google', { scope: config.googleOAuth2.scope } ) );
+app.get( '/login/google/callback', passport.authenticate( 'google', { successRedirect: '/', failureRedirect: '/' } ) );
 
 app.use( history() );
 app.get( '/', ( req, res, next ) => {
