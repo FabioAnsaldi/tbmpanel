@@ -1,0 +1,14 @@
+[
+  {
+    "group": "guest",
+    "permissions": [
+      {
+        "resource": "bundle",
+        "methods": [
+          "GET"
+        ],
+        "action": "allow"
+      }
+    ]
+  }
+]

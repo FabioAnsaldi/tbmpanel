@@ -15,12 +15,21 @@ const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const bodyParser = require( 'body-parser' );
 const request = require( 'request' );
 const jwt = require( 'jwt-simple' );
+const acl = require( 'express-acl' );
 
 /* Environment configuration constant */
 const port = config.environment.production.port || 9000;
 const address = config.environment.production.address || 'localhost';
 config.OAuth2.secretKey = 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc';
 process.env.NODE_ENV = config.environment.production.env;
+
+acl.config( {
+    filename: config.paths.acl.filename,
+    path: config.paths.configuration,
+    defaultRole: config.paths.acl.defaultRole,
+    decodedObjectName: config.paths.acl.decodedObjectName
+} );
+app.use( acl.authorize.unless( { path: [ '/login', '/login/google' ] } ) );
 
 app.use( cookieParser() );
 app.use( bodyParser.json() );
@@ -90,10 +99,10 @@ app.post( '/login', passport.authenticate( 'local', { session: false } ), ( req,
 app.get( '/login/google', passport.authenticate( 'google', { scope: config.googleOAuth2.scope } ) );
 app.get( '/login/google/callback', passport.authenticate( 'google', { successRedirect: '/', failureRedirect: '/' } ) );
 
-app.use( express.static( path.join( process.cwd(), config.paths.build ) ) );
-app.get( '/', ( req, res, next ) => {
+app.get( '/', ( req, res ) => {
     res.sendFile( path.join( process.cwd(), config.paths.build + '/index.html' ) );
 } );
+app.use( express.static( path.join( process.cwd(), config.paths.build ) ) );
 
 app.set( 'address', address );
 app.listen( port, ( err ) => {

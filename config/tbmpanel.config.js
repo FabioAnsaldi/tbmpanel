@@ -12,7 +12,12 @@ exports.paths = {
     source: 'src',
     build: 'build',
     assets: '/',
-    bundle: 'bundle.js'
+    bundle: 'bundle.js',
+    acl: {
+        filename: 'acl.json',
+        defaultRole: 'guest',
+        decodedObjectName: 'user'
+    }
 };
 
 /**

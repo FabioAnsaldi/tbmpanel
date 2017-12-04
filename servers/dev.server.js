@@ -20,6 +20,7 @@ const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const bodyParser = require( 'body-parser' );
 const request = require( 'request' );
 const jwt = require( 'jwt-simple' );
+const acl = require( 'express-acl' );
 
 /* Environment configuration constant */
 const port = config.environment.develop.port || 9000;
@@ -27,9 +28,32 @@ const address = config.environment.develop.address || 'localhost';
 config.OAuth2.secretKey = 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc';
 process.env.NODE_ENV = config.environment.develop.env;
 
+app.use( history( {
+    verbose: true,
+    index: config.paths.assets + '/index.html',
+    rewrites: [
+        { from: config.paths.bundle, to: '/' + config.paths.bundle },
+        {
+            from: /^\/.*$/,
+            to: ( context ) => {
+                return context.parsedUrl.pathname;
+            }
+        }
+    ],
+    disableDotRule: true,
+} ) );
+
 const compiler = webpack( webpackConfig );
 app.use( webpackDevMiddleware( compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath } ) );
-app.use( webpackHotMiddleware( compiler ) );
+app.use( webpackHotMiddleware( compiler, { reload: true, log: console.log } ) );
+
+acl.config( {
+    filename: config.paths.acl.filename,
+    path: config.paths.configuration,
+    defaultRole: config.paths.acl.defaultRole,
+    decodedObjectName: config.paths.acl.decodedObjectName
+} );
+app.use( acl.authorize.unless( { path: [ '/login', '/login/google' ] } ) );
 
 app.use( cookieParser() );
 app.use( bodyParser.json() );
@@ -98,15 +122,10 @@ app.post( '/login', passport.authenticate( 'local' ), ( req, res ) => {
 app.get( '/login/google', passport.authenticate( 'google', { scope: config.googleOAuth2.scope } ) );
 app.get( '/login/google/callback', passport.authenticate( 'google', { successRedirect: '/', failureRedirect: '/' } ) );
 
-app.use( history() );
-app.get( '/', ( req, res, next ) => {
-    res.sendFile( path.join( process.cwd(), config.paths.source + '/index.html' ) );
-} );
-
 app.set( 'address', address );
 app.listen( port, ( err ) => {
     if ( err ) {
-        console.error( err );
+        console.log( err );
     } else {
         console.info( '==> Listening on. Open up http://%s:%s/ in your browser.', address, port );
     }

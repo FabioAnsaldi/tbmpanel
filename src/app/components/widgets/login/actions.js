@@ -32,7 +32,7 @@ export const userPasswordChange = ( input ) => {
 export const userSingIn = ( input ) => {
     return {
         type: 'USER_SINGIN',
-        logged: input
+        logged: JSON.stringify( input )
     };
 };
 
