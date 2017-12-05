@@ -10,5 +10,17 @@
         "action": "allow"
       }
     ]
+  },
+  {
+    "group": "user",
+    "permissions": [
+      {
+        "resource": "/login/google/callback",
+        "methods": [
+          "GET"
+        ],
+        "action": "allow"
+      }
+    ]
   }
 ]

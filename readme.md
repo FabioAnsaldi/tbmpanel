@@ -6,11 +6,12 @@
 3. [.babelrc](#babelrc)
     1. [import-glob](#glob)
 4. [Create component](#create)
-5. [Run environment](#run)
+5. [Build the project](#build)
+6. [Run environment](#run)
     1. [Run production environment](#production)
     2. [Run develop environment](#develop)
-6. [Test environment](#test)
-7. [License](#license)
+7. [Test environment](#test)
+8. [License](#license)
 
 ######
 ##### EVN configuration files <a name="env-config"></a>
@@ -21,10 +22,13 @@ We find configuration files into the folder `./config`
 | Property | Description |
 | --- | --- |
 | config.paths.assets | Contains root path |
-| config.paths.bundle | Contains bundle file JS name |
 | config.paths.build | Contains build folder path |
+| config.paths.bundle | Contains bundle file JS name |
 | config.paths.configuration | Contains config folder path |
 | config.paths.source | Contains source folder path |
+| config.paths.acl.filename | Contains the file name of ACL roles |
+| config.paths.acl.defaultRole | Contains the group name of default user of the new panel |
+| config.paths.acl.decodedObjectName | Contains the object name of the autentication result |
 | | |
 | config.OAuth2.AuthorityServerUrl | Contains the API Url to get Token |
 | config.OAuth2.clientID | Contains application number to require authentication at API Url |
@@ -75,6 +79,14 @@ npm run create
 ######
 #### Run environment <a name="run"></a>
 There are different environment which you can run
+
+#####
+#### Build the project <a name="build"></a>
+To build the project for the production environment:
+```sh
+npm run build
+```
+> It runs webpack handler to build the project. You can find the files into build folder
 
 ######
 ##### Run production environment <a name="production"></a>
