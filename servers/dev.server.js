@@ -27,6 +27,7 @@ const port = config.environment.develop.port || 9000;
 const address = config.environment.develop.address || 'localhost';
 config.OAuth2.secretKey = 'm-cVXwv-qcuWqvrZYSV3F2gvVWzDmpEvL41VTxLO6vc';
 process.env.NODE_ENV = config.environment.develop.env;
+const compiler = webpack( webpackConfig );
 
 app.use( history( {
     verbose: true,
@@ -43,17 +44,13 @@ app.use( history( {
     disableDotRule: true,
 } ) );
 
-const compiler = webpack( webpackConfig );
-app.use( webpackDevMiddleware( compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath } ) );
-app.use( webpackHotMiddleware( compiler, { reload: true, log: console.log } ) );
-
 acl.config( {
     filename: config.paths.acl.filename,
     path: config.paths.configuration,
     defaultRole: config.paths.acl.defaultRole,
     decodedObjectName: config.paths.acl.decodedObjectName
 } );
-app.use( acl.authorize.unless( { path: [ '/login', '/login/google' ] } ) );
+app.use( acl.authorize.unless( { path: [ '/login', '/login/google', '/login/google/callback' ] } ) );
 
 app.use( cookieParser() );
 app.use( bodyParser.json() );
@@ -116,11 +113,30 @@ passport.use( new GoogleStrategy( {
         } );
     }
 ) );
+
 app.post( '/login', passport.authenticate( 'local' ), ( req, res ) => {
     res.send( req.user );
 } );
 app.get( '/login/google', passport.authenticate( 'google', { scope: config.googleOAuth2.scope } ) );
 app.get( '/login/google/callback', passport.authenticate( 'google', { successRedirect: '/', failureRedirect: '/' } ) );
+
+/* Mock User Data */
+app.use( ( req, res, next ) => {
+    if ( req.user ) {
+        if ( !req.user.role ) {
+            req.user.role = 'user';
+        }
+    } else {
+        req.user = {
+            role: 'guest'
+        }
+    }
+    console.log( req.user );
+    next();
+} );
+
+app.use( webpackDevMiddleware( compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath } ) );
+app.use( webpackHotMiddleware( compiler, { reload: true, log: console.log } ) );
 
 app.set( 'address', address );
 app.listen( port, ( err ) => {
