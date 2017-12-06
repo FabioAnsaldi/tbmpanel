@@ -1,6 +1,6 @@
 'use strict';
 
-const initialState = {
+export const initialState = {
     title: 'Sign In Form',
     googleStatus: 'Sing in with Google',
     labelsubmit: 'Sign in',

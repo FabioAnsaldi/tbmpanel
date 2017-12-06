@@ -1,6 +1,6 @@
 'use strict';
 
-const initialState = {
+export const initialState = {
     output: 'Use React with Redux'
 };
 

@@ -29,7 +29,7 @@ acl.config( {
     defaultRole: config.paths.acl.defaultRole,
     decodedObjectName: config.paths.acl.decodedObjectName
 } );
-app.use( acl.authorize.unless( { path: [ '/login', '/login/google' ] } ) );
+app.use( acl.authorize.unless( { path: [ '/login', '/login/google', '/login/google/callback' ] } ) );
 
 app.use( cookieParser() );
 app.use( bodyParser.json() );
@@ -93,7 +93,7 @@ passport.use( new GoogleStrategy( {
     }
 ) );
 
-app.post( '/login', passport.authenticate( 'local', { session: false } ), ( req, res ) => {
+app.post( '/login', passport.authenticate( 'local' ), ( req, res ) => {
     res.send( req.user );
 } );
 app.get( '/login/google', passport.authenticate( 'google', { scope: config.googleOAuth2.scope } ) );

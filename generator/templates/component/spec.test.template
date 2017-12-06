@@ -1,0 +1,22 @@
+import 'raf-polyfill';
+import React from 'react'
+import ShallowRenderer from 'react-test-renderer/shallow';
+import { {Name} } from './index';
+import { initialState } from './reducer';
+
+const renderer = new ShallowRenderer();
+
+describe( '>>>{Name} component', () => {
+    let wrapper = 0;
+    const props = { {name}Reducer: initialState };
+
+    beforeEach( () => {
+        renderer.render( <{Name} {...props}/> );
+        wrapper = renderer.getRenderOutput();
+    } );
+
+    it( '+++ render the DUMB component', () => {
+        expect( wrapper.type ).toBe( 'div' );
+    } );
+
+} );

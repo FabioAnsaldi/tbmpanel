@@ -113,7 +113,14 @@ npm run test
 > Testing a React-Redux application using Jest and Enzyme.
 
 We are going to use:
-`jest ` `babel-jest ` `enzyme  ` `react-addons-test-utils` `react-test-renderer` `redux-mock-combiner`
+`jest ` `babel-jest ` `react-test-renderer` `redux-mock-combiner` `raf-polyfill`
+
+* [jest](http://facebook.github.io/jest/) : Unit Testing framework for ReactJs developed by Facebook.
+* babel-jest: To support ES6 and ES7 for our tests.
+* react-test-renderer: Used to grab snapshot of DOM tree rendered by React DOM/ React Native components
+* redux-mock-store : Used to mock our Redux store.
+* raf-polyfill: React depends on requestAnimationFrame.
+We aldo use 'react-dom/test-utils', it provides the React TestUtils which we won’t use directly but it is required as a dependency to enzyme.
 
 Look at the [Link](https://medium.com/netscape/testing-a-react-redux-app-using-jest-and-enzyme-b349324803a9) for more info.
 
