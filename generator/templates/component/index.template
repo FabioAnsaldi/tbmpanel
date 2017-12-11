@@ -14,7 +14,9 @@ export class {Name} extends Component {
             this.props.dispatch( {name}Actions.someAction( result ) );
         };
         return (
-            <div className="{name}">{this.props.{name}Reducer.output}</div>
+            <div className="{name}">
+                <h4>{this.props.{name}Reducer.output}</h4>
+            </div>
         );
     }
 }

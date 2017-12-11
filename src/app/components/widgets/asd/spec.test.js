@@ -5,19 +5,19 @@ import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import configureStore from 'redux-mock-store';
-import ConnectedComponent, { {Name} } from './index';
+import ConnectedComponent, { Asd } from './index';
 import { initialState } from './reducer';
 
 const renderer = new ShallowRenderer();
 let mockStore = configureStore();
 configure({ adapter: new Adapter() });
 
-describe( '>>>{Name} component (Shallow + passing the {store} directly)', () => {
+describe( '>>>Asd component (Shallow + passing the  directly)', () => {
     let wrapper, container;
-    let props = { {name}Reducer: initialState };
+    let props = { asdReducer: initialState };
 
     beforeEach( () => {
-        renderer.render( <{Name} { ...props }/> );
+        renderer.render( <Asd { ...props }/> );
         wrapper = renderer.getRenderOutput();
         renderer.render( <ConnectedComponent { ...props }/> );
         container = renderer.getRenderOutput();
@@ -31,8 +31,8 @@ describe( '>>>{Name} component (Shallow + passing the {store} directly)', () => 
     } );
 } );
 
-describe( '>>>{Name} REACT-REDUX component (Mount + wrapping in Provider component)', () => {
-    let props = { {name}Reducer: initialState };
+describe( '>>>Asd REACT-REDUX component (Mount + wrapping in Provider component)', () => {
+    let props = { asdReducer: initialState };
     let store, container;
 
     beforeEach( () => {
@@ -41,6 +41,6 @@ describe( '>>>{Name} REACT-REDUX component (Mount + wrapping in Provider compone
     } );
 
     it( '+++ render the connected(SMART) component', () => {
-        expect( container.contains( <h4>{ props.{name}Reducer.output }</h4> ) ).toBe( true );
+        expect( container.contains( <h4>{ props.asdReducer.output }</h4> ) ).toBe( true );
     } );
 } );

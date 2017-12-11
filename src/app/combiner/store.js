@@ -23,11 +23,3 @@ if ( module.hot ) {
 }
 
 export default store;
-/*
-import { createStore, applyMiddleware } from 'redux';
-import combination from './index';
-import { createLogger } from 'redux-logger';
-
-const logger = createLogger();
-const store = createStore( combination, applyMiddleware( logger ) );
- */
