@@ -33,7 +33,10 @@ export class Login extends Component {
                     <strong>or</strong>
                 </p>
                 <p>
-                    <Button raised href={"/login/google"} color="accent">{this.props.loginReducer.googleStatus}</Button>
+                    <Button raised href={"/login/google"} color="primary">{this.props.loginReducer.googleStatus}</Button>
+                </p>
+                <p>
+                    <Button raised href={"/logout"} color="accent">logout</Button>
                 </p>
                 <strong>error: [{this.props.loginReducer.error}]</strong>
                 <strong>logged: [{this.props.loginReducer.logged.toString()}]</strong>

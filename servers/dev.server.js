@@ -50,7 +50,6 @@ acl.config( {
     defaultRole: config.paths.acl.defaultRole,
     decodedObjectName: config.paths.acl.decodedObjectName
 } );
-app.use( acl.authorize.unless( { path: [ '/login', '/login/google', '/login/google/callback' ] } ) );
 
 app.use( cookieParser() );
 app.use( bodyParser.json() );
@@ -68,6 +67,7 @@ app.use( session( {
     resave: true,
     saveUninitialized: true
 } ) );
+
 app.use( passport.initialize() );
 app.use( passport.session() );
 passport.use( new LocalStrategy( ( username, password, done ) => {
@@ -119,6 +119,11 @@ app.post( '/login', passport.authenticate( 'local' ), ( req, res ) => {
 } );
 app.get( '/login/google', passport.authenticate( 'google', { scope: config.googleOAuth2.scope } ) );
 app.get( '/login/google/callback', passport.authenticate( 'google', { successRedirect: '/', failureRedirect: '/' } ) );
+app.get( '/logout', ( req, res ) => {
+    req.logout();
+    req.session.destroy();
+    res.redirect( '/' );
+} );
 
 /* Mock User Data */
 app.use( ( req, res, next ) => {
@@ -131,7 +136,6 @@ app.use( ( req, res, next ) => {
             role: 'guest'
         }
     }
-    console.log( req.user );
     next();
 } );
 
