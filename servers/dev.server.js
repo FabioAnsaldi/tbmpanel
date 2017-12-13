@@ -18,7 +18,7 @@ const passport = require( 'passport' );
 const LocalStrategy = require( 'passport-local' ).Strategy;
 const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const bodyParser = require( 'body-parser' );
-const request = require( 'request' );
+const request = require ( 'request' );
 const jwt = require( 'jwt-simple' );
 const acl = require( 'express-acl' );
 
@@ -50,6 +50,7 @@ acl.config( {
     defaultRole: config.paths.acl.defaultRole,
     decodedObjectName: config.paths.acl.decodedObjectName
 } );
+app.use( acl.authorize );
 
 app.use( cookieParser() );
 app.use( bodyParser.json() );

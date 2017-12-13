@@ -21,14 +21,14 @@ export class Login extends Component {
         return (
             <div className="login">
                 <h4>{this.props.loginReducer.title}</h4>
-                <div className="form">
+                <form className="form">
                     <TextField type="text" name="username" placeholder={this.props.loginReducer.labelusername} onChange={onNameChange}/>
                     <br/>
                     <TextField type="password" name="password" placeholder={this.props.loginReducer.labelpassword} onChange={onPasswordChange}/>
                     <p>
                         <Button raised onClick={onSignInClick} color="primary">{this.props.loginReducer.labelsubmit}</Button>
                     </p>
-                </div>
+                </form>
                 <p>
                     <strong>or</strong>
                 </p>

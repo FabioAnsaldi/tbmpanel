@@ -15,6 +15,13 @@
           "GET"
         ],
         "action": "allow"
+      },
+      {
+        "resource": "logout",
+        "methods": [
+          "GET"
+        ],
+        "action": "allow"
       }
     ]
   },
