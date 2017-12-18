@@ -148,6 +148,6 @@ app.listen( port, ( err ) => {
     if ( err ) {
         console.log( err );
     } else {
-        console.info( '==> Listening on. Open up http://%s:%s/ in your browser.', address, port );
+        console.info( '==> Wep server is listening on. Open up http://%s:%s/ in your browser.', address, port );
     }
 } );

@@ -54,5 +54,9 @@ exports.environment = {
         env: 'production',
         address: 'localhost.mydomain.com',
         port: '8080'
+    },
+    api: {
+        port: 4000,
+        address: 'localhost'
     }
 };
