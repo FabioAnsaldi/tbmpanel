@@ -8,7 +8,7 @@ const merge = require( 'webpack-merge' );
 const common = require( './webpack.common.js' );
 
 module.exports = merge( common, {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'cheap-module-source-map',
     entry: [],
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

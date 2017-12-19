@@ -1,11 +1,8 @@
-/**
- * Created by fabio.ansaldi on 10/11/2017.
- */
 'use strict';
 
 import { initialState } from './reducer';
 
-export const resetMain = () => {
+export const resetMenu = () => {
     return Object.assign( {}, { type: 'RESET_STATE' }, initialState );
 };
 
@@ -16,10 +13,10 @@ export const setMenu = ( input ) => {
     };
 };
 
-export const setPages = ( input ) => {
+export const setLinks = ( input ) => {
     return {
-        type: 'SET_PAGES',
-        pages: input
+        type: 'SET_LINKS',
+        links: input
     };
 };
 
@@ -29,3 +26,4 @@ export const errorRequest = ( input ) => {
         error: input
     };
 };
+
