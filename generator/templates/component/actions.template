@@ -1,7 +1,8 @@
 'use strict';
 
 import { initialState } from './reducer';
+import TYPES from './types';
 
 export const resetMenu = () => {
-    return Object.assign( {}, { type: 'RESET_STATE' }, initialState );
+    return Object.assign( {}, { type: TYPES.RESET_STATE }, initialState );
 };

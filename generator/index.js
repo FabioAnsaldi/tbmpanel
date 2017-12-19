@@ -161,7 +161,8 @@ class Generator {
     makePlaceholderReplacing( _fileData ) {
         let injectedData = {
             name: this.options.componentName,
-            Name: this.capitalizeFirstLetter( this.options.componentName )
+            Name: this.capitalizeFirstLetter( this.options.componentName ),
+            NAME: this.options.componentName.toUpperCase(),
         };
         this.options.data = Object.assign( this.options.data, injectedData );
         let formattedData = stringTemplate( _fileData.fileContent, this.options.data );

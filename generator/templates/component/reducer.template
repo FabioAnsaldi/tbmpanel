@@ -1,12 +1,14 @@
 'use strict';
 
+import TYPES from './types';
+
 export const initialState = {
     output: 'Use React with Redux'
 };
 
 const {name}Reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'RESET_STATE':
+        case TYPES.RESET_STATE:
             return Object.assign( {}, state, initialState );
         default:
             return state;
