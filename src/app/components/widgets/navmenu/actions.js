@@ -6,13 +6,6 @@ export const resetMenu = () => {
     return Object.assign( {}, { type: 'RESET_STATE' }, initialState );
 };
 
-export const setMenu = ( input ) => {
-    return {
-        type: 'SET_MENU',
-        menu: input
-    };
-};
-
 export const setLinks = ( input ) => {
     return {
         type: 'SET_LINKS',

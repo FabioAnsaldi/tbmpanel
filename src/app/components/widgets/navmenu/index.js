@@ -5,10 +5,6 @@ import { connect } from 'react-redux';
 import * as navmenuFunctions from './functions';
 
 export class Navmenu extends Component {
-    componentDidMount() {
-        navmenuFunctions.apiRequest( this.props );
-    }
-
     componentDidUpdate( prevProps ) {
         navmenuFunctions.menuChangeCheck( prevProps, this.props );
     }
@@ -27,7 +23,8 @@ export class Navmenu extends Component {
 
 function mapStateToProps( state ) {
     return {
-        navmenuReducer: state.navmenuReducer
+        navmenuReducer: state.navmenuReducer,
+        mainReducer: state.mainReducer
     };
 }
 
