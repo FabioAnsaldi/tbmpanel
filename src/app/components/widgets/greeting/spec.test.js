@@ -41,6 +41,6 @@ describe( '>>>Greeting REACT-REDUX component (Mount + wrapping in Provider compo
     } );
 
     it( '+++ render the connected(SMART) component', () => {
-        expect( container.contains( <h4>{ props.greetingReducer.output }</h4> ) ).toBe( true );
+        expect( container.contains( <h4>{ props.greetingReducer.title }</h4> ) ).toBe( true );
     } );
 } );

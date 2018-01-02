@@ -3,7 +3,7 @@
 import TYPES from './types';
 
 export const initialState = {
-    title: 'Use React with Redux',
+    title: 'Try to click the button!',
     output: ':-('
 };
 

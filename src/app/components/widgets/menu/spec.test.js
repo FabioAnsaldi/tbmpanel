@@ -10,16 +10,16 @@ import { initialState } from './reducer';
 
 const renderer = new ShallowRenderer();
 let mockStore = configureStore();
-configure({ adapter: new Adapter() });
+configure( { adapter: new Adapter() } );
 
 describe( '>>>Menu component (Shallow + passing the  directly)', () => {
     let wrapper, container;
     let props = { menuReducer: initialState };
 
     beforeEach( () => {
-        renderer.render( <Menu { ...props }/> );
+        renderer.render( <Menu {...props}/> );
         wrapper = renderer.getRenderOutput();
-        renderer.render( <ConnectedComponent { ...props }/> );
+        renderer.render( <ConnectedComponent {...props}/> );
         container = renderer.getRenderOutput();
     } );
 
@@ -32,15 +32,21 @@ describe( '>>>Menu component (Shallow + passing the  directly)', () => {
 } );
 
 describe( '>>>Menu REACT-REDUX component (Mount + wrapping in Provider component)', () => {
-    let props = { menuReducer: initialState };
+    let initialMenu = {
+        home: {
+            label: 'Home',
+            href: '/'
+        }
+    };
+    let props = { menuReducer: initialState, mainReducer: { menu: initialMenu } };
     let store, container;
 
     beforeEach( () => {
         store = mockStore( props );
-        container = mount( <Provider store={ store }><ConnectedComponent/></Provider> )
+        container = mount( <Provider store={store}><ConnectedComponent/></Provider> )
     } );
 
     it( '+++ render the connected(SMART) component', () => {
-        expect( container.contains( <h4>{ props.menuReducer.output }</h4> ) ).toBe( true );
+        expect( container.contains( <legend>{props.menuReducer.title}</legend> ) ).toBe( true );
     } );
 } );

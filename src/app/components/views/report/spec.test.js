@@ -41,6 +41,6 @@ describe( '>>>Report REACT-REDUX component (Mount + wrapping in Provider compone
     } );
 
     it( '+++ render the connected(SMART) component', () => {
-        expect( container.contains( <h4>{ props.reportReducer.output }</h4> ) ).toBe( true );
+        expect( container.contains( <h4>{ props.reportReducer.title }</h4> ) ).toBe( true );
     } );
 } );

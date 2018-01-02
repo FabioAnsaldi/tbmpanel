@@ -15,6 +15,7 @@ export class Greeting extends Component {
         };
         return (
             <div className="greeting">
+                <h4>{this.props.greetingReducer.title}</h4>
                 <button className="btn" onClick={letsGreeting}>Click me!</button>
                 <br/>
                 <strong>{this.props.greetingReducer.output}</strong>

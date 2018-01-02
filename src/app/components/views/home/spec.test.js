@@ -6,20 +6,21 @@ import Adapter from 'enzyme-adapter-react-16';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import configureStore from 'redux-mock-store';
 import ConnectedComponent, { Home } from './index';
+import { BrowserRouter } from 'react-router-dom';
 import { initialState } from './reducer';
 
 const renderer = new ShallowRenderer();
 let mockStore = configureStore();
-configure({ adapter: new Adapter() });
+configure( { adapter: new Adapter() } );
 
 describe( '>>>Home component (Shallow + passing the  directly)', () => {
     let wrapper, container;
     let props = { homeReducer: initialState };
 
     beforeEach( () => {
-        renderer.render( <Home { ...props }/> );
+        renderer.render( <Home {...props}/> );
         wrapper = renderer.getRenderOutput();
-        renderer.render( <ConnectedComponent { ...props }/> );
+        renderer.render( <ConnectedComponent {...props}/> );
         container = renderer.getRenderOutput();
     } );
 
@@ -32,15 +33,15 @@ describe( '>>>Home component (Shallow + passing the  directly)', () => {
 } );
 
 describe( '>>>Home REACT-REDUX component (Mount + wrapping in Provider component)', () => {
-    let props = { homeReducer: initialState };
+    let props = { homeReducer: initialState, greetingReducer: { title: 'Title' }, loginReducer: { title: 'Title', logged: false } };
     let store, container;
 
     beforeEach( () => {
         store = mockStore( props );
-        container = mount( <Provider store={ store }><ConnectedComponent/></Provider> )
+        container = mount( <Provider store={store}><BrowserRouter><ConnectedComponent/></BrowserRouter></Provider> )
     } );
 
     it( '+++ render the connected(SMART) component', () => {
-        expect( container.contains( <h4>{ props.homeReducer.output }</h4> ) ).toBe( true );
+        expect( container.contains( <h2>{props.homeReducer.title}</h2> ) ).toBe( true );
     } );
 } );

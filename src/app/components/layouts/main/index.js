@@ -7,7 +7,7 @@ import { withRouter } from 'react-router';
 import * as mainFunctions from './functions';
 import Menu from '../../widgets/menu/index.js';
 
-class Main extends Component {
+export class Main extends Component {
     componentDidMount() {
         mainFunctions.apiRequest( this.props );
     }

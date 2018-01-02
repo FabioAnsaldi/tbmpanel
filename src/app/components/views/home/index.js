@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 import Greeting from '../../widgets/greeting/index.js';
 import Login from '../../widgets/login/index.js';
 
-class Home extends Component {
+export class Home extends Component {
     render() {
         return (
             <div className="home">

@@ -12,7 +12,7 @@ export class Report extends Component {
     render() {
         return (
             <div className="report">
-                <h2>{this.props.reportReducer.title}</h2>
+                <h4>{this.props.reportReducer.title}</h4>
                 {this.props.reportReducer.visible ?
                     <table cellPadding="10" cellSpacing="0" width="100%">
                         <thead>

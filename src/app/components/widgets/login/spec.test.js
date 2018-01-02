@@ -41,6 +41,6 @@ describe( '>>>Login REACT-REDUX component (Mount + wrapping in Provider componen
     } );
 
     it( '+++ render the connected(SMART) component', () => {
-        expect( container.contains( <h4>{ props.loginReducer.output }</h4> ) ).toBe( true );
+        expect( container.contains( <h4>{ props.loginReducer.title }</h4> ) ).toBe( true );
     } );
 } );
