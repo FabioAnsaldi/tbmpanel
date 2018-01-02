@@ -7,7 +7,7 @@ import * as views from '../../views/**/index.js';
 
 const config = require( '../../../../../config/tbmpanel.config.js' );
 
-const doRequest = ( props ) => {
+const doRequest = () => {
     return new Promise( ( fulfill, reject ) => {
         let init = {
             method: 'GET'
@@ -24,7 +24,7 @@ const doRequest = ( props ) => {
 };
 
 export const apiRequest = ( state ) => {
-    doRequest( state.mainReducer ).then( ( json ) => {
+    doRequest().then( ( json ) => {
         state.dispatch( mainActions.setMenu( json ) );
     } ).catch( ( e ) => {
         state.dispatch( mainActions.errorRequest( e ) );
@@ -37,7 +37,7 @@ export const makePagesRows = ( state ) => {
     for ( let i in menu ) {
         if ( menu.hasOwnProperty( i ) ) {
             if ( i in views ) {
-                rows.push( <Route key={i} exact path={menu[ i ].href} component={views[ i ]} /> );
+                rows.push( <Route key={i} exact path={menu[ i ].href} component={views[ i ]}/> );
             }
         }
     }

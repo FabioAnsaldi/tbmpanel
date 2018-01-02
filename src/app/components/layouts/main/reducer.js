@@ -1,10 +1,9 @@
-/**
- * Created by fabio.ansaldi on 10/11/2017.
- */
-
 'use strict';
+
+import TYPES from './types';
+
 export const initialState = {
-    title: 'Use Redux',
+    title: 'Use React with Redux',
     menu: {
         home: {
             label: 'Home',
@@ -17,13 +16,13 @@ export const initialState = {
 
 const mainReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'RESET_STATE':
+        case TYPES.RESET_STATE:
             return Object.assign( {}, state, initialState );
-        case 'SET_MENU':
+        case TYPES.SET_MENU:
             return Object.assign( {}, state, { 'menu': action.menu } );
-        case 'SET_PAGES':
+        case TYPES.SET_PAGES:
             return Object.assign( {}, state, { 'pages': action.pages } );
-        case 'ERROR_REQUEST':
+        case TYPES.ERROR_REQUEST:
             return Object.assign( {}, state, { 'error': action.error } );
         default:
             return state;

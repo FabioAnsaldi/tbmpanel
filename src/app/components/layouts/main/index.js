@@ -1,14 +1,11 @@
-/**
- * Created by fabio.ansaldi on 10/11/2017.
- */
-
 'use strict';
+
 import React, { Component } from 'react';
 import { Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import * as mainFunctions from './functions';
-import Navmenu from '../../widgets/navmenu/index.js';
+import Menu from '../../widgets/menu/index.js';
 
 class Main extends Component {
     componentDidMount() {
@@ -22,8 +19,18 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <Navmenu/>
-                <Switch>{this.props.mainReducer.pages}</Switch>
+                <header>
+                    <img className="logo" src="https://www.google.com/a/triboo.it/images/logo.gif" style={{ maxWidth: "144px", maxHeight: "60px" }}/>
+                    <Menu/>
+                </header>
+                <main>
+                    <Switch>{this.props.mainReducer.pages}</Switch>
+                </main>
+                <footer>
+                    <p style={{ textAlign: "center" }}>
+                        <b>Powered by React & Redux</b>
+                    </p>
+                </footer>
             </div>
         );
     }

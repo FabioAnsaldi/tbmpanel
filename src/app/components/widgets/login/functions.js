@@ -5,43 +5,41 @@ import * as loginActions from './actions';
 const config = require( '../../../../../config/tbmpanel.config.js' );
 
 const doQueryString = ( data ) => {
-    let a = [];
+    let queryString = [];
     for ( let p in data ) {
         if ( data.hasOwnProperty( p ) ) {
-            a.push( encodeURIComponent( p ) + "=" + encodeURIComponent( data[ p ] ) );
+            queryString.push( encodeURIComponent( p ) + "=" + encodeURIComponent( data[ p ] ) );
         }
     }
-    return a.join( "&" );
+    return queryString.join( "&" );
 };
 
 const doLogin = ( props ) => {
     return new Promise( ( fulfill, reject ) => {
-        setTimeout( () => {
-            if ( props.username && props.password ) {
-                let headers = new Headers();
-                headers.append( 'Content-Type', 'application/x-www-form-urlencoded' );
-                let init = {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: headers,
-                    body: doQueryString( {
-                        username: props.username,
-                        password: props.password,
-                        client_id: config.OAuth2.clientID,
-                        grant_type: config.OAuth2.grantType
-                    } ),
-                };
-                fetch( '/login', init ).then( ( response ) => {
-                    return response.json();
-                } ).then( ( json ) => {
-                    return fulfill( json );
-                } ).catch( ( e ) => {
-                    return reject( false );
-                } );
-            } else {
+        if ( props.username && props.password ) {
+            let headers = new Headers();
+            headers.append( 'Content-Type', 'application/x-www-form-urlencoded' );
+            let init = {
+                method: 'POST',
+                credentials: 'include',
+                headers: headers,
+                body: doQueryString( {
+                    username: props.username,
+                    password: props.password,
+                    client_id: config.OAuth2.clientID,
+                    grant_type: config.OAuth2.grantType
+                } ),
+            };
+            fetch( '/login', init ).then( ( response ) => {
+                return response.json();
+            } ).then( ( json ) => {
+                return fulfill( json );
+            } ).catch( ( e ) => {
                 return reject( false );
-            }
-        }, 1000 );
+            } );
+        } else {
+            return reject( false );
+        }
     } );
 };
 

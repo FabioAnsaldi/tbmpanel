@@ -1,34 +1,42 @@
-/**
- * Created by fabio.ansaldi on 10/11/2017.
- */
-
 'use strict';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router'
-import Greeting from '../../widgets/greeting/index.js';
-import Foobaring from '../../widgets/foobaring/index.js';
+import * as reportFunctions from './functions';
 
-class Report extends Component {
+export class Report extends Component {
+    componentDidMount() {
+        reportFunctions.showTable( this.props );
+    }
+
     render() {
         return (
-            <div>
-                <h2>{this.props.reportReducer.output}</h2>
-                <h4>Report {this.props.match.params.number}</h4>
-                <table cellPadding="10" cellSpacing="0" width="100%">
-                    <thead>
+            <div className="report">
+                <h2>{this.props.reportReducer.title}</h2>
+                {this.props.reportReducer.visible ?
+                    <table cellPadding="10" cellSpacing="0" width="100%">
+                        <thead>
                         <tr>
-                            <th>Greeting Component</th>
-                            <th>Foobaring Component</th>
+                            <th>Report ID</th>
+                            <th>Report Name</th>
+                            <th>Report Value</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
-                            <td align="center"><Greeting/></td>
-                            <td align="center"><Foobaring/></td>
+                            <td align="center">123</td>
+                            <td align="center">First Report</td>
+                            <td align="center">Hello there!</td>
                         </tr>
-                    </tbody>
-                </table>
+                        <tr>
+                            <td align="center">456</td>
+                            <td align="center">Second Report</td>
+                            <td align="center">Good bye!</td>
+                        </tr>
+                        </tbody>
+                    </table> :
+                    <p><b>Hey man! Log in to see this section</b></p>
+                }
             </div>
         );
     }
@@ -40,4 +48,4 @@ function mapStateToProps( state ) {
     };
 }
 
-export default withRouter( connect( mapStateToProps )( Report ) );
+export default connect( mapStateToProps )( Report );

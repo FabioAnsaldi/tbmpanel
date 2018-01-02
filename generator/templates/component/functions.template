@@ -2,15 +2,10 @@
 
 import * as {name}Actions from './actions';
 
-const doSomething = ( props ) => {
-    /* TODO */
-    return false;
-};
-
 export const something = ( state ) => {
-    let result = doSomething( state.{name}Reducer );
+    let props = state.{name}Reducer;
     /**
-     * TODO
+     * TODO something function
      * state.dispatch( {name}Actions.someAction( result ) );
      */
 };

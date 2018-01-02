@@ -1,21 +1,22 @@
-/**
- * Created by fabio.ansaldi on 10/11/2017.
- */
-
 'use strict';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { say } from './actions';
+import * as greetingFunctions from './functions';
 
 export class Greeting extends Component {
+    componentDidUpdate( prevProps ) {
+        greetingFunctions.greetsChangeCheck( prevProps, this.props );
+    }
 
     render() {
         let letsGreeting = () => {
-            this.props.dispatch( say( 'Hello!' ) );
+            greetingFunctions.greeting( this.props );
         };
         return (
             <div className="greeting">
-                <button className="btn" onClick={letsGreeting}>Click me!</button><br/>
+                <button className="btn" onClick={letsGreeting}>Click me!</button>
+                <br/>
                 <strong>{this.props.greetingReducer.output}</strong>
             </div>
         );

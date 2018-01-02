@@ -3,6 +3,18 @@
 import { initialState } from './reducer';
 import TYPES from './types';
 
-export const resetMenu = () => {
-    return Object.assign( {}, { type: TYPES.RESET_STATE }, initialState );
+export const reset{Name} = () => {
+    return Object.assign( {}, {
+        type: TYPES.RESET_STATE
+    }, initialState );
+};
+
+export const something = ( input ) => {
+    return {
+        type: 'SOMETHING',
+        /**
+         * TODO something props
+         * aProps: input
+         */
+    };
 };

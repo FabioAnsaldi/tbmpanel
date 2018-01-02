@@ -5,19 +5,19 @@ import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import configureStore from 'redux-mock-store';
-import ConnectedComponent, { Navmenu } from './index';
+import ConnectedComponent, { Greeting } from './index';
 import { initialState } from './reducer';
 
 const renderer = new ShallowRenderer();
 let mockStore = configureStore();
 configure({ adapter: new Adapter() });
 
-describe( '>>>Navmenu component (Shallow + passing the  directly)', () => {
+describe( '>>>Greeting component (Shallow + passing the  directly)', () => {
     let wrapper, container;
-    let props = { navmenuReducer: initialState };
+    let props = { greetingReducer: initialState };
 
     beforeEach( () => {
-        renderer.render( <Navmenu { ...props }/> );
+        renderer.render( <Greeting { ...props }/> );
         wrapper = renderer.getRenderOutput();
         renderer.render( <ConnectedComponent { ...props }/> );
         container = renderer.getRenderOutput();
@@ -31,8 +31,8 @@ describe( '>>>Navmenu component (Shallow + passing the  directly)', () => {
     } );
 } );
 
-describe( '>>>Navmenu REACT-REDUX component (Mount + wrapping in Provider component)', () => {
-    let props = { navmenuReducer: initialState };
+describe( '>>>Greeting REACT-REDUX component (Mount + wrapping in Provider component)', () => {
+    let props = { greetingReducer: initialState };
     let store, container;
 
     beforeEach( () => {
@@ -41,6 +41,6 @@ describe( '>>>Navmenu REACT-REDUX component (Mount + wrapping in Provider compon
     } );
 
     it( '+++ render the connected(SMART) component', () => {
-        expect( container.contains( <h4>{ props.navmenuReducer.output }</h4> ) ).toBe( true );
+        expect( container.contains( <h4>{ props.greetingReducer.output }</h4> ) ).toBe( true );
     } );
 } );

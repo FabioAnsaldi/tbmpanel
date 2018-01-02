@@ -1,22 +1,24 @@
 'use strict';
 
+import TYPES from './types';
+
 export const initialState = {
-    title: 'Menu',
+    title: 'Primary Menu',
     links: [],
     error: ''
 };
 
-const navmenuReducer = ( state = initialState, action ) => {
+const menuReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'RESET_STATE':
+        case TYPES.RESET_STATE:
             return Object.assign( {}, state, initialState );
-        case 'SET_LINKS':
+        case TYPES.SET_LINKS:
             return Object.assign( {}, state, { 'links': action.links } );
-        case 'ERROR_REQUEST':
+        case TYPES.ERROR_REQUEST:
             return Object.assign( {}, state, { 'error': action.error } );
         default:
             return state;
     }
 };
 
-export default navmenuReducer;
+export default menuReducer;

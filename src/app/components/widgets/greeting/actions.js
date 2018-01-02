@@ -1,19 +1,17 @@
-/**
- * Created by fabio.ansaldi on 10/11/2017.
- */
-
 'use strict';
 
-export const init = ( output ) => {
-    return {
-        type: 'INITIAL_STATE',
-        output: output
-    };
+import { initialState } from './reducer';
+import TYPES from './types';
+
+export const resetGreeting = () => {
+    return Object.assign( {}, {
+        type: TYPES.RESET_STATE
+    }, initialState );
 };
 
-export const say = ( output ) => {
+export const greets = ( output ) => {
     return {
-        type: 'SAY_HELLO',
+        type: TYPES.SAY_GREETS,
         output: output
     };
 };

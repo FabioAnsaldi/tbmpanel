@@ -1,12 +1,17 @@
-/**
- * Created by fabio.ansaldi on 10/11/2017.
- */
-
 'use strict';
 
-export const init = ( output ) => {
+import { initialState } from './reducer';
+import TYPES from './types';
+
+export const resetReport = () => {
+    return Object.assign( {}, {
+        type: TYPES.RESET_STATE
+    }, initialState );
+};
+
+export const setDisplayTable = ( input ) => {
     return {
-        type: "INITIAL_STATE",
-        output: output
+        type: TYPES.SET_DISPLAY_TABLE,
+        visible: input
     };
 };

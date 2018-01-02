@@ -5,19 +5,19 @@ import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import configureStore from 'redux-mock-store';
-import ConnectedComponent, { Login } from './index';
+import ConnectedComponent, { Report } from './index';
 import { initialState } from './reducer';
 
 const renderer = new ShallowRenderer();
 let mockStore = configureStore();
 configure({ adapter: new Adapter() });
 
-describe( '>>>Login component (Shallow + passing the  directly)', () => {
+describe( '>>>Report component (Shallow + passing the  directly)', () => {
     let wrapper, container;
-    let props = { loginReducer: initialState };
+    let props = { reportReducer: initialState };
 
     beforeEach( () => {
-        renderer.render( <Login { ...props }/> );
+        renderer.render( <Report { ...props }/> );
         wrapper = renderer.getRenderOutput();
         renderer.render( <ConnectedComponent { ...props }/> );
         container = renderer.getRenderOutput();
@@ -31,8 +31,8 @@ describe( '>>>Login component (Shallow + passing the  directly)', () => {
     } );
 } );
 
-describe( '>>>Login REACT-REDUX component (Mount + wrapping in Provider component)', () => {
-    let props = { loginReducer: initialState };
+describe( '>>>Report REACT-REDUX component (Mount + wrapping in Provider component)', () => {
+    let props = { reportReducer: initialState };
     let store, container;
 
     beforeEach( () => {
@@ -41,6 +41,6 @@ describe( '>>>Login REACT-REDUX component (Mount + wrapping in Provider componen
     } );
 
     it( '+++ render the connected(SMART) component', () => {
-        expect( container.contains( <h4>{ props.loginReducer.output }</h4> ) ).toBe( true );
+        expect( container.contains( <h4>{ props.reportReducer.output }</h4> ) ).toBe( true );
     } );
 } );

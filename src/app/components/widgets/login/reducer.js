@@ -1,5 +1,7 @@
 'use strict';
 
+import TYPES from './types';
+
 export const initialState = {
     title: 'Sign In Form',
     googleStatus: 'Sing in with Google',
@@ -14,15 +16,15 @@ export const initialState = {
 
 const loginReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case 'RESET_STATE':
+        case TYPES.RESET_STATE:
             return Object.assign( {}, state, initialState );
-        case 'USER_NAME_CHANGE':
+        case TYPES.USER_NAME_CHANGE:
             return Object.assign( {}, state, { 'username': action.username } );
-        case 'USER_PASSWORD_CHANGE':
+        case TYPES.USER_PASSWORD_CHANGE:
             return Object.assign( {}, state, { 'password': action.password } );
-        case 'USER_SINGIN':
+        case TYPES.USER_SINGIN:
             return Object.assign( {}, state, { 'logged': action.logged } );
-        case 'ERROR_SINGIN':
+        case TYPES.ERROR_SINGIN:
             return Object.assign( {}, state, { 'error': action.error } );
         default:
             return state;
